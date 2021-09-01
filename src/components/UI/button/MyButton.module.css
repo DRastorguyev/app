@@ -1,18 +1,22 @@
 .myBtn {
   padding: 5px 20px;
-  color: rgba(116, 15, 119, 0.925);
+  color: #945297;
   font-size: 14px;
   background: transparent;
-  border: 1px solid rgba(116, 15, 119, 0.925);
+  border: none;
   cursor: pointer;
-  border-radius: 3px;
-  font-weight: 100;
+  border-radius: 7px;
+  font-weight: 600;
 
   transition: all ease .1s;
+
+  margin: 0 3px;
+
+  box-shadow: 2px 1px 3px rgba(97, 88, 97, 0.315);
 }
 
 .myBtn:hover {
-  background-color: transparent;
+  background-color: rgba(163, 160, 160, 0.575);
   color: #000;
-  box-shadow: 1px 2px 4px rgb(87, 81, 77);
+  box-shadow: 1px 2px 4px rgba(87, 81, 77, 0.212);
 }

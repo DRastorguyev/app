@@ -1,43 +1,37 @@
-import React, { useState } from 'react';
-import MyButton from './UI/button/MyButton';
-import MyInput from './UI/input/MyInput'
+import React, { useState } from "react";
+import MyInput from "./UI/input/MyInput";
 
-
-const TodoForm = ({create}) => {
-
-  const [todo, setTodo] = useState({title: ''})
+const TodoForm = ({ create }) => {
+  const [todo, setTodo] = useState({ title: "" });
 
   const addNewTodo = (e) => {
-    e.preventDefault()
     const newTodo = {
-      ...todo, id: Date.now()
-    }
-    create(newTodo)
-    setTodo({title: ''})
-  }
+      ...todo,
+      id: Date.now(),
+      date: new Date().toLocaleDateString(),
+    };
+    todo.title === "" ? alert("Пусто") : create(newTodo);
+    setTodo({ title: "" });
+  };
 
   return (
     <div>
       <form
         style={{
-          display: "flex",
-          justifyContent: "space-between",
           alignItems: "center",
+          paddingTop: 10,
         }}
       >
         <MyInput
-          // onKeyDown={e => {
-          //   console.log(e)
-          //   if(e.code !== 'Enter') return
-          //   console.log(e)
-          //   e.preventDefault()
-          //   addNewTodo()
-          // }} - submit on 'Enter'
-          onChange={e => setTodo({...todo, title: e.target.value})}
+          onKeyDown={(e) => {
+            if (e.code !== "Enter") return;
+            e.preventDefault();
+            addNewTodo();
+          }}
+          onChange={(e) => setTodo({ ...todo, title: e.target.value })}
           value={todo.title}
-          type="text" 
+          type="text"
         />
-        <MyButton onClick={addNewTodo}>OK</MyButton>
       </form>
     </div>
   );

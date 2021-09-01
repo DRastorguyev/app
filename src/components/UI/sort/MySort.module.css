@@ -1,0 +1,11 @@
+.mySort {
+	margin-top: 10px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.sort__btn {
+	display: flex;
+	align-items: center;
+}

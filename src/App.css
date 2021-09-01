@@ -4,12 +4,19 @@
 
   box-sizing: border-box;
 
-  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-;
+  font-family: 'Open Sans', sans-serif;
 }
 
 .App {
+  margin-top: 100px;
+  padding: 0 40px 40px 40px;
   width: 800px;
+
+  background-color: rgba(110, 108, 108, 0.021);
+
+  border-radius: 50px;
+  box-shadow:  20px 20px 60px #af61b51e,
+             -20px -20px 60px #ed83f525;
 }
 
 #root {
@@ -25,19 +32,28 @@
   padding: 15px 35px;
   margin-top: 25px;
 
-  border: 0 solid rgba(116, 15, 119, 0.925);
   border-radius: 10px;
 
-  box-shadow: 1px 0px 4px rgba(116 15 119 / 78%);
-
-  background: rgba(189, 52, 194, 0.048);
+  box-shadow: 3px 1px 4px rgba(97, 88, 97, 0.315);
 
   transition: all ease .10s;
 }
 
 .todo:hover {
-  border: 1px solid rgba(76, 10, 78, 0.925);
   border-radius: 10px;
-  background: rgba(189, 52, 194, 0.212);
-  box-shadow: 1px 0px 4px rgba(116 15 119 / 78%);
+  background: rgba(189, 52, 194, 0.103);
+  box-shadow: 1px 0px 4px rgba(36, 33, 36, 0.78);
+  cursor: pointer;
+}
+
+.todoDone {
+  transition: all .6s ease-out;
+  box-shadow: none;
+  background: rgba(49, 47, 47, 0.308);
+  
+}
+
+.todoDone:hover {
+  background: rgba(189, 52, 194, 0.253);
+  box-shadow: none;
 }

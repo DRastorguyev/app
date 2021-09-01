@@ -4,14 +4,27 @@ import MyButton from "./UI/button/MyButton";
 const TodoItem = (props) => {
   return (
     <div>
-      <div className="todo">
+      <div 
+        onClick={() => props.selectToDo(props.todo.id)}
+        className={props.todo.done ? ['todo', 'todoDone'].join(' ') : 'todo'}>
         <div className="todo__content">
-          <strong>
+          <div>
             {props.number}. {props.todo.title}
-          </strong>
+          </div>
         </div>
         <div className="todo__btns">
-          <MyButton onClick={() => props.remove(props.todo)} >Удалить</MyButton>
+          {props.todo.date}
+          <MyButton
+            style={{ marginLeft: 10 }}
+            onClick={(e) => {
+              e.stopPropagation()
+              props.remove(props.todo)
+
+              }
+            }
+          >
+            <i class="far fa-trash-alt"></i>
+          </MyButton>
         </div>
       </div>
     </div>
