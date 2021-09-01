@@ -4,9 +4,10 @@ import MyButton from "./UI/button/MyButton";
 const TodoItem = (props) => {
   return (
     <div>
-      <div 
+      <div
         onClick={() => props.selectToDo(props.todo.id)}
-        className={props.todo.done ? ['todo', 'todoDone'].join(' ') : 'todo'}>
+        className={props.todo.done ? ["todo", "todoDone"].join(" ") : "todo"}
+      >
         <div className="todo__content">
           <div>
             {props.number}. {props.todo.title}
@@ -17,13 +18,11 @@ const TodoItem = (props) => {
           <MyButton
             style={{ marginLeft: 10 }}
             onClick={(e) => {
-              e.stopPropagation()
-              props.remove(props.todo)
-
-              }
-            }
+              e.stopPropagation();
+              props.remove(props.todo);
+            }}
           >
-            <i class="far fa-trash-alt"></i>
+            <i className="far fa-trash-alt"></i>
           </MyButton>
         </div>
       </div>

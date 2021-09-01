@@ -2,17 +2,32 @@ import React from "react";
 import MyButton from "../button/MyButton";
 import cl from "../pagination/MyPagination.module.css";
 
-const MyPagination = () => {
+const MyPagination = ({lastPage, ...props}) => {
+
+  const pageArr = []
+
+  for (let i = 1; i <= lastPage; i++) pageArr.push(i)
+
+  
+
+
   return (
     <div className={cl.myPagination}>
-      <MyButton>
-        <i class="fas fa-angle-double-left"></i>
+      <MyButton onClick={() => props.setPage(1)} >
+        <i className="fas fa-angle-double-left"></i>
       </MyButton>
-      <MyButton>1</MyButton>
-      <MyButton>2</MyButton>
-      <MyButton>3</MyButton>
-      <MyButton>
-        <i class="fas fa-angle-double-right"></i>
+      {pageArr.map(page => 
+        <MyButton  
+          current={page === props.page ? true : false} 
+          onClick={() => props.setPage(page)} 
+        >
+        {page}
+        </MyButton>
+      )}
+      <MyButton 
+        onClick={() => props.setPage(lastPage)}
+      >
+        <i className="fas fa-angle-double-right"></i>
       </MyButton>
     </div>
   );
