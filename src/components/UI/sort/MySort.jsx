@@ -2,18 +2,36 @@ import React from 'react';
 import MyButton from '../button/MyButton';
 import cl from '../sort/MySort.module.css'
 
-const MySort = () => {
+const MySort = ({setFilter}) => {
+
+	const filterButtonHandler = ( filterType) => {
+
+		return () => {
+			setFilter(filterState => ({...filterState, filterType}))
+		} 
+
+	}
+
+	const sortButtonHandler = (sortDirection) => {
+
+		return () => {
+			setFilter(filterState => ({...filterState, sortDirection}))
+		} 
+
+	}
+
+
 	return (
 		<div className={cl.mySort}>
 			<div>
-				<MyButton>Все</MyButton>
-				<MyButton>Готовые</MyButton>
-				<MyButton>Активные</MyButton>
+				<MyButton onClick={filterButtonHandler('ALL')} >Все</MyButton>
+				<MyButton onClick={filterButtonHandler('DONE')}>Готовые</MyButton>
+				<MyButton onClick={filterButtonHandler('UNDONE')}>Активные</MyButton>
 			</div>
 			<div className={cl.sort__btn} >
 				<p style={{marginRight: 5}} >Отсортировать по дате</p>
-				<MyButton><i class="fas fa-chevron-up"></i></MyButton>
-				<MyButton><i class="fas fa-chevron-down"></i></MyButton>
+				<MyButton onClick={sortButtonHandler('ASC')} ><i class="fas fa-chevron-up"></i></MyButton>
+				<MyButton onClick={sortButtonHandler('DESC')}><i class="fas fa-chevron-down"></i></MyButton>
 			</div>
 		</div>
 	);

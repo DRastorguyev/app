@@ -13,7 +13,7 @@ const TodoItem = (props) => {
           </div>
         </div>
         <div className="todo__btns">
-          {props.todo.date}
+          {props.todo.date.substr(0, 10)}
           <MyButton
             style={{ marginLeft: 10 }}
             onClick={(e) => {

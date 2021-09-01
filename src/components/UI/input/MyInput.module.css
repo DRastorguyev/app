@@ -11,7 +11,16 @@ input {
 
   border: none;
 
-  box-shadow: 3px 0px 4px rgba(97, 88, 97, 0.315);
+  transition: ease-in-out all .2s;
 
   font-size: 18px;
+}
+
+
+.myInput:hover {
+  background: rgba(61, 59, 59, 0.062);
+}
+
+.myInput:focus {
+  box-shadow: 3px 0px 4px rgba(97, 88, 97, 0.315);
 }

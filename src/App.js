@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import "./App.css";
 import TodoForm from "./components/TodoForm";
 import TodoList from "./components/TodoList";
@@ -10,22 +10,51 @@ function App() {
     {
       id: 1,
       title: "Подстричься под теннис",
-      date: new Date().toLocaleDateString(),
+      date: '2021-10-01T12:26:21.139Z',
       done: false,
     },
     {
       id: 2,
       title: "Купить мочалку",
-      date: new Date().toLocaleDateString(),
+      date: '2021-07-01T12:26:21.139Z',
       done: false,
     },
     {
       id: 3,
       title: "Сходить на курсы по английскому",
-      date: new Date().toLocaleDateString(),
-      done: false,
+      date: '2021-09-01T12:26:21.139Z',
+      done: true,
     },
   ]);
+
+  const [filter, setFilter] = useState({
+    sortDirection: "ASC",
+    filterType: "ALL",
+  });
+
+  const sortedAndFiltredArr = useMemo(() => {
+
+    let filtredArr = []
+
+    switch(filter.filterType) {
+      case 'DONE':
+        filtredArr = todos.filter(todo => todo.done)
+        break
+      case 'UNDONE':
+        filtredArr = todos.filter(todo => !todo.done)
+        break
+      default:
+        filtredArr = todos
+        break
+    }
+
+    return filtredArr.sort((a, b) => {
+      if(filter.sortDirection === 'ASC') return new Date(a.date).getTime() - new Date(b.date).getTime()
+      return new Date(b.date).getTime() - new Date(a.date).getTime()
+    })
+  }, [todos, filter])
+
+  console.log(todos)
 
   const createTodo = (newTodo) => {
     setTodos([...todos, newTodo]);
@@ -42,7 +71,6 @@ function App() {
     selectedToDo.done = !selectedToDo.done;
 
     setTodos(newTodosState);
-
     // setTodos(todosState => {
 
     //   const newTodosState = [...todosState]
@@ -61,21 +89,19 @@ function App() {
           paddingTop: 35,
           marginBottom: 10,
           fontSize: 45,
-          fontWeight: 300,
+          fontWeight: 100,
         }}
       >
         ToDo
       </h1>
-      <hr />
       <TodoForm create={createTodo} />
-      <MySort />
+      <MySort setFilter={setFilter} />
       {todos.length ? (
-        <TodoList selectToDo={selectToDo} remove={removeTodo} todos={todos} />
+        <TodoList selectToDo={selectToDo} remove={removeTodo} todos={sortedAndFiltredArr} />
       ) : (
         <h1 style={{ textAlign: "center", margin: 60 }}>Пусто :(</h1>
       )}
       <MyPagination />
-      <hr style={{ marginTop: 20 }} />
     </div>
   );
 }

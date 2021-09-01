@@ -43,17 +43,19 @@
   border-radius: 10px;
   background: rgba(189, 52, 194, 0.103);
   box-shadow: 1px 0px 4px rgba(36, 33, 36, 0.78);
+
   cursor: pointer;
 }
 
 .todoDone {
   transition: all .6s ease-out;
   box-shadow: none;
+
   background: rgba(49, 47, 47, 0.308);
-  
 }
 
 .todoDone:hover {
   background: rgba(189, 52, 194, 0.253);
+  
   box-shadow: none;
 }

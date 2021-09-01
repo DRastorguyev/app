@@ -8,7 +8,7 @@ const TodoForm = ({ create }) => {
     const newTodo = {
       ...todo,
       id: Date.now(),
-      date: new Date().toLocaleDateString(),
+      date: new Date().toISOString(),
     };
     todo.title === "" ? alert("Пусто") : create(newTodo);
     setTodo({ title: "" });
