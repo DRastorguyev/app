@@ -10,9 +10,16 @@ const TodoForm = ({ create }) => {
       id: Date.now(),
       date: new Date().toISOString(),
     };
-    todo.title === "" ? alert("Пусто") : create(newTodo);
-    setTodo({ title: "" });
+    if (todo.title.trim() === "") {
+      setError("Форма пустая");
+      setTimeout(() => setError(""), 3000);
+    } else {
+      create(newTodo);
+      setTodo({ title: "" });
+    }
   };
+
+  const [error, setError] = useState("");
 
   return (
     <div>
@@ -23,16 +30,18 @@ const TodoForm = ({ create }) => {
         }}
       >
         <MyInput
-          onKeyDown={(e) => {
+          onKeyDown={e => {
             if (e.code !== "Enter") return;
             e.preventDefault();
             addNewTodo();
+            console.log(e)
           }}
           onChange={(e) => setTodo({ ...todo, title: e.target.value })}
           value={todo.title}
           type="text"
         />
       </form>
+      {error && <div style={{ color: "red", marginBottom: 30, fontSize: 12}} >{error}</div>}
     </div>
   );
 };

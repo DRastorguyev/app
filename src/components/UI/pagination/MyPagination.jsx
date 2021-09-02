@@ -17,9 +17,10 @@ const MyPagination = ({lastPage, ...props}) => {
         <i className="fas fa-angle-double-left"></i>
       </MyButton>
       {pageArr.map(page => 
-        <MyButton  
+        <MyButton
+          key={page}
           current={page === props.page ? true : false} 
-          onClick={() => props.setPage(page)} 
+          onClick={() => props.setPage(page)}
         >
         {page}
         </MyButton>

@@ -45,6 +45,8 @@
   box-shadow: 1px 0px 4px rgba(36, 33, 36, 0.78);
 
   cursor: pointer;
+
+  text-decoration: underline;
 }
 
 .todoDone {

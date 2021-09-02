@@ -24,9 +24,9 @@ const MyFilter = ({ setFilter }) => {
   return (
     <div className={cl.myFilter}>
       <div>
-        <MyButton onClick={filterButtonHandler("ALL")}>ALL</MyButton>
-        <MyButton onClick={filterButtonHandler("DONE")}>DONE</MyButton>
-        <MyButton onClick={filterButtonHandler("UNDONE")}>UNDONE</MyButton>
+        <MyButton style={{marginRight: 10}} onClick={filterButtonHandler("ALL")}>ALL</MyButton>
+        <MyButton style={{marginRight: 10}} onClick={filterButtonHandler("DONE")}>DONE</MyButton>
+        <MyButton style={{marginRight: 10}} onClick={filterButtonHandler("UNDONE")}>UNDONE</MyButton>
       </div>
       <div style={{ display: "flex", alignItems: "center" }}>
         <p style={{ marginRight: 5, fontSize: 15 }}>Сортировать по дате</p>

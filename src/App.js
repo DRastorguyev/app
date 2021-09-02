@@ -90,7 +90,8 @@ function App() {
       <TodoForm create={createTodo} />
       <MySort setFilter={setFilter} />
       {todos.length ? (
-        <TodoList        
+        <TodoList     
+          setTodos={setTodos}  
           selectToDo={selectToDo}
           remove={removeTodo}
           todos={sortedAndFiltredArr.slice((page - 1) * 5, page * 5)}
