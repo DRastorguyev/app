@@ -1,22 +1,23 @@
 import React, { useState } from "react";
-import MyButton from "./UI/button/MyButton";
 import MyInput from "./UI/input/MyInput";
+import { Checkbox } from 'antd';
+import { DeleteOutlined } from "@ant-design/icons";
 
-const TodoItem = ({setTodos, ...props}) => {
-
+const TodoItem = ({ setTodos, ...props }) => {
   const [showInput, setShowInput] = useState(false);
 
-  const editTodo = e => {
-    if(e.code !== 'Enter') return
-    console.log(e.target.value)
-    setTodos(todosState => {
-      return todosState.map(todo => {
-        if(todo.id === props.todo.id) return {...todo, title: e.target.value}
-        return todo
-      })
-    })
-    setShowInput(false)
-  }
+  const editTodo = (e) => {
+    if (e.code !== "Enter") return;
+    console.log(e);
+    setTodos((todosState) => {
+      return todosState.map((todo) => {
+        if (todo.id === props.todo.id)
+          return { ...todo, title: e.target.value };
+        return todo;
+      });
+    });
+    setShowInput(false);
+  };
 
   return (
     <div>
@@ -24,45 +25,38 @@ const TodoItem = ({setTodos, ...props}) => {
         onClick={() => setShowInput(true)}
         className={props.todo.done ? ["todo", "todoDone"].join(" ") : "todo"}
       >
-        <div
-          className="todo__content"
-        >
-          
+        <div>
           <div>
-            <MyButton
-              style={{marginRight: 10}}
-              onClick={ e => {
+            <Checkbox
+              style={{ marginRight: 10 }}
+              onClick={(e) => {
                 e.stopPropagation();
-                props.selectToDo(props.todo.id)
-              }
-                }>
-              <i className="far fa-check-circle"></i>
-            </MyButton>{" "}
-            {showInput 
-          ?  
-            <MyInput
-              style={{marginTop: 30}}
-              autoFocus
-              onBlur={() => setShowInput(false)}
-              onKeyDown={editTodo}
-              defaultValue={props.todo.title} />
-          :
-             `${props.number} | ${props.todo.title}` 
-          }
-
+                props.selectToDo(props.todo.id);
+              }}
+            />
+            {showInput ? (
+              <MyInput
+                style={{ marginTop: 30 }}
+                autoFocus
+                onBlur={() => setShowInput(false)}
+                onKeyDown={editTodo}
+                defaultValue={props.todo.title}
+              />
+            ) : (
+              `${props.number} | ${props.todo.title}`
+            )}
           </div>
         </div>
-        <div className="todo__btns">
+        <div>
           {props.todo.date.substr(0, 10)}
-          <MyButton
-            style={{ marginLeft: 25 }}
+          <DeleteOutlined
+            className='deleteBtn:hover'
+            style={{ marginLeft: 25, fontSize: '1.2em' }}
             onClick={(e) => {
               e.stopPropagation();
               props.remove(props.todo);
             }}
-          >
-            <i className="far fa-trash-alt"></i>
-          </MyButton>
+          />
         </div>
       </div>
     </div>

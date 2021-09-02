@@ -34,7 +34,6 @@ const TodoForm = ({ create }) => {
             if (e.code !== "Enter") return;
             e.preventDefault();
             addNewTodo();
-            console.log(e)
           }}
           onChange={(e) => setTodo({ ...todo, title: e.target.value })}
           value={todo.title}

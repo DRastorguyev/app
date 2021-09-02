@@ -1,12 +1,13 @@
 import React from 'react';
 import cl from '../input/MyInput.module.css'
+import { Input } from 'antd';
 
 
 const MyInput = (props) => {
   
   return (
     <div>
-      <input {...props} className={cl.myInput} placeholder='Купить молочка...' />
+      <Input  {...props} className={cl.myInput} placeholder='Купить молочка...' />
     </div>
   );
 };

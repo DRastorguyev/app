@@ -2,6 +2,7 @@ import React from "react";
 import MyButton from "../button/MyButton";
 import cl from "../filter/MyFilter.module.css";
 
+
 const MyFilter = ({ setFilter }) => {
   const filterButtonHandler = (filterType) => {
     return () => {

@@ -4,8 +4,13 @@ import TodoForm from "./components/TodoForm";
 import TodoList from "./components/TodoList";
 import MyPagination from "./components/UI/pagination/MyPagination";
 import MySort from "./components/UI/sort/MySort";
+import { Typography, Row, Col, Divider, } from "antd";
+import Item from "antd/lib/list/Item";
+
+// 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
 
 function App() {
+  const { Title } = Typography;
 
   const [todos, setTodos] = useState([
     {
@@ -72,34 +77,45 @@ function App() {
     setTodos(newTodosState);
   };
 
-  const [ page, setPage ] = useState(1)
+  const [page, setPage] = useState(1);
 
   return (
     <div className="App">
-      <h1
+      <Divider
+        orientation="left"
+        level={1}
         style={{
-          textAlign: "center",
-          paddingTop: 35,
-          marginBottom: 10,
-          fontSize: 45,
-          fontWeight: 100,
-        }}
+        textAlign: "center",
+        paddingTop: 10,
+        marginBottom: 10,
+        fontSize: 45,
+        fontWeight: 100,
+      }}
       >
         ToDo
-      </h1>
+      </Divider>
       <TodoForm create={createTodo} />
-      <MySort setFilter={setFilter} />
-      {todos.length ? (
-        <TodoList     
-          setTodos={setTodos}  
-          selectToDo={selectToDo}
-          remove={removeTodo}
-          todos={sortedAndFiltredArr.slice((page - 1) * 5, page * 5)}
-        />
-      ) : (
-        <h1 style={{ textAlign: "center", margin: 60 }}>Пусто :(</h1>
-      )}
-      <MyPagination setPage={setPage} page={page} lastPage={Math.ceil(sortedAndFiltredArr.length / 5)} />
+      <Row>
+        <Col xs={24} md={{span: 24, offset: 0}}>
+        
+          <MySort setFilter={setFilter} />
+          {todos.length ? (
+            <TodoList
+              setTodos={setTodos}
+              selectToDo={selectToDo}
+              remove={removeTodo}
+              todos={sortedAndFiltredArr.slice((page - 1) * 5, page * 5)}
+            />
+          ) : (
+            <h1 style={{ textAlign: "center", margin: 60 }}>Пусто :(</h1>
+          )}
+          <MyPagination
+            setPage={setPage}
+            page={page}
+            lastPage={Math.ceil(sortedAndFiltredArr.length / 5)}
+          />
+        </Col>
+      </Row>
     </div>
   );
 }

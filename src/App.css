@@ -12,11 +12,11 @@
   padding: 0 40px 40px 40px;
   width: 800px;
 
-  background-color: rgba(110, 108, 108, 0.021);
+  background-color: rgba(0, 0, 0, 0.021);
 
-  border-radius: 50px;
-  box-shadow:  20px 20px 60px #af61b51e,
-             -20px -20px 60px #ed83f525;
+  border-radius: 5px;
+  box-shadow:  20px 20px 60px #2e2a2e1e,
+             -20px -20px 60px #75707525;
 }
 
 #root {
@@ -32,7 +32,7 @@
   padding: 15px 35px;
   margin-top: 25px;
 
-  border-radius: 10px;
+  border-radius: 2px;
 
   box-shadow: 3px 1px 4px rgba(97, 88, 97, 0.315);
 
@@ -41,7 +41,7 @@
 
 .todo:hover {
   border-radius: 10px;
-  background: rgba(189, 52, 194, 0.103);
+  background: rgba(120, 108, 121, 0.103);
   box-shadow: 1px 0px 4px rgba(36, 33, 36, 0.78);
 
   cursor: pointer;
@@ -57,7 +57,11 @@
 }
 
 .todoDone:hover {
-  background: rgba(189, 52, 194, 0.253);
+  background: rgba(29, 28, 29, 0.253);
 
   box-shadow: none;
+}
+
+.deleteBtn:hover {
+  color: white
 }
