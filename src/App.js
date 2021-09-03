@@ -5,7 +5,7 @@ import TodoList from './components/TodoList';
 import MySort from './components/UI/sort/MySort';
 import { Row, Col, Divider, Pagination } from 'antd';
 
-// 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
+// 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
 
 function App() {
   const [todos, setTodos] = useState([
@@ -99,7 +99,7 @@ function App() {
             todos={todos}
             setTodos={setTodos}
             selectToDo={selectToDo}
-            remove={removeTodo}
+            removeTodo={removeTodo}
             todos={sortedAndFiltredArr.slice((page - 1) * 5, page * 5)}
           />
           <Pagination

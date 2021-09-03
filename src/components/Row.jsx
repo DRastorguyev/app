@@ -5,7 +5,7 @@ import { CheckCircleOutlined, DeleteOutlined } from '@ant-design/icons';
 import MyInput from './UI/input/MyInput';
 import { List } from 'antd';
 
-const RowBox = ({ todos, todo, setTodos, selectToDo, remove }) => {
+const RowBox = ({  todo, setTodos, selectToDo, removeTodo }) => {
 
   const [showInput, setShowInput] = useState(false);
 
@@ -62,7 +62,7 @@ const RowBox = ({ todos, todo, setTodos, selectToDo, remove }) => {
             <Button
               onClick={(e) => {
                 e.stopPropagation();
-                remove(todo);
+                removeTodo(todo);
               }}
               style={{ marginLeft: 10 }}
               shape='circle'
