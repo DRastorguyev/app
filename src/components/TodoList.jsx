@@ -1,22 +1,22 @@
+import { List } from 'antd';
 import React from 'react';
-import TodoItem from './TodoItem';
+import RowBox from './Row';
 
-const TodoList = ({todos, remove, selectToDo, setTodos}) => {
-
-  const data = [
-    'Racing car sprays burning fuel into crowd.',
-    'Japanese princess to wed commoner.',
-    'Australian walks 100km after outback crash.',
-    'Man charged over missing wedding girl.',
-    'Los Angeles battles huge wildfires.',
-  ];
-
+const TodoList = ({ todos, remove, selectToDo, setTodos }) => {
   return (
-    <div>
-      {todos.map((todo, index) => 
-        <TodoItem setTodos={setTodos} selectToDo={selectToDo} remove={remove} number={index + 1} todo={todo} key={todo.id} />
+    <List
+      size='large'
+      dataSource={todos}
+      renderItem={(todo) => (
+        <RowBox
+          todos={todos}
+          todo={todo}
+          setTodos={setTodos}
+          selectToDo={selectToDo}
+          removeTodo={remove}
+        />
       )}
-    </div>
+    />
   );
 };
 

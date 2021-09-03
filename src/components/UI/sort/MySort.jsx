@@ -1,6 +1,6 @@
-import React from "react";
-import MyButton from "../button/MyButton";
-import cl from "../sort/MySort.module.css";
+import { Button } from 'antd';
+import React from 'react';
+import cl from '../sort/MySort.module.css';
 
 const MySort = ({ setFilter }) => {
   const filterButtonHandler = (filterType) => {
@@ -18,18 +18,54 @@ const MySort = ({ setFilter }) => {
   return (
     <div className={cl.mySort}>
       <div>
-        <MyButton onClick={filterButtonHandler("ALL")}>Все</MyButton>
-        <MyButton onClick={filterButtonHandler("DONE")}>Готовые</MyButton>
-        <MyButton onClick={filterButtonHandler("UNDONE")}>Активные</MyButton>
+        <Button
+          size='small'
+          style={{ marginRight: 10 }}
+          type='ghost'
+          shape='round'
+          onClick={filterButtonHandler('ALL')}
+        >
+          Все
+        </Button>
+        <Button
+          size='small'
+          style={{ marginRight: 10 }}
+          type='ghost'
+          shape='round'
+          onClick={filterButtonHandler('DONE')}
+        >
+          Готовые
+        </Button>
+        <Button
+          size='small'
+          style={{ marginRight: 10 }}
+          type='ghost'
+          shape='round'
+          onClick={filterButtonHandler('UNDONE')}
+        >
+          Активные
+        </Button>
       </div>
       <div className={cl.sort__btn}>
-        <p style={{ marginRight: 5 }}>Отсортировать по дате</p>
-        <MyButton onClick={sortButtonHandler("ASC")}>
-          <i className="fas fa-chevron-up"></i>
-        </MyButton>
-        <MyButton onClick={sortButtonHandler("DESC")}>
-          <i className="fas fa-chevron-down"></i>
-        </MyButton>
+        <p style={{ marginRight: 5, marginBottom: 0 }}>Отсортировать по дате</p>
+        <Button
+          size='small'
+          style={{ marginRight: 10 }}
+          type='ghost'
+          shape='round'
+          onClick={sortButtonHandler('ASC')}
+        >
+          <i className='fas fa-chevron-up'></i>
+        </Button>
+        <Button
+          size='small'
+          style={{ marginRight: 10 }}
+          type='ghost'
+          shape='round'
+          onClick={sortButtonHandler('DESC')}
+        >
+          <i className='fas fa-chevron-down'></i>
+        </Button>
       </div>
     </div>
   );

@@ -7,7 +7,7 @@ const MyInput = (props) => {
   
   return (
     <div>
-      <Input  {...props} className={cl.myInput} placeholder='Купить молочка...' />
+      <Input {...props} className={cl.myInput} placeholder='Купить молочка...' />
     </div>
   );
 };

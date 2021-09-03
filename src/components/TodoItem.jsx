@@ -1,13 +1,13 @@
-import React, { useState } from "react";
-import MyInput from "./UI/input/MyInput";
+import React, { useState } from 'react';
+import MyInput from './UI/input/MyInput';
 import { Checkbox } from 'antd';
-import { DeleteOutlined } from "@ant-design/icons";
+import { DeleteOutlined } from '@ant-design/icons';
 
 const TodoItem = ({ setTodos, ...props }) => {
   const [showInput, setShowInput] = useState(false);
 
   const editTodo = (e) => {
-    if (e.code !== "Enter") return;
+    if (e.code !== 'Enter') return;
     console.log(e);
     setTodos((todosState) => {
       return todosState.map((todo) => {
@@ -23,7 +23,7 @@ const TodoItem = ({ setTodos, ...props }) => {
     <div>
       <div
         onClick={() => setShowInput(true)}
-        className={props.todo.done ? ["todo", "todoDone"].join(" ") : "todo"}
+        className={props.todo.done ? ['todo', 'todoDone'].join(' ') : 'todo'}
       >
         <div>
           <div>
@@ -43,7 +43,7 @@ const TodoItem = ({ setTodos, ...props }) => {
                 defaultValue={props.todo.title}
               />
             ) : (
-              `${props.number} | ${props.todo.title}`
+              props.todo.title
             )}
           </div>
         </div>
