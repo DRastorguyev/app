@@ -15,7 +15,7 @@ const RowBox = ({  todo, setTodos, selectToDo, removeTodo }) => {
     setTodos((todosState) => {
       return todosState.map((todoItem) => {
         if (todoItem.id === todo.id)
-          return { ...todo, title: e.target.value };
+          return { ...todo, name: e.target.value };
         return todoItem;
       });
     });
@@ -48,17 +48,17 @@ const RowBox = ({  todo, setTodos, selectToDo, removeTodo }) => {
                   autoFocus
                   onBlur={() => setShowInput(false)}
                   onKeyDown={editTodo}
-                  defaultValue={todo.title}
+                  defaultValue={todo.name}
                 />
               ) : (
-                todo.title
+                todo.name
               )}
             </Typography>
           </Row>
         </Col>
         <Col>
           {/* {todo.data.slice(0, 10)} */}
-          <Tooltip placement='right' title='Удалить'>
+          <Tooltip placement='right' title='Удалить'>   
             <Button
               onClick={(e) => {
                 e.stopPropagation();

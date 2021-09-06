@@ -2,7 +2,7 @@ import { List } from 'antd';
 import React from 'react';
 import RowBox from './Row';
 
-const TodoList = ({ todos, removeTodo, selectToDo, setTodos }) => {
+const TodoList = ({ todos, removeTodo, selectToDo }) => {
   return (
     <List
       size='large'
@@ -11,7 +11,6 @@ const TodoList = ({ todos, removeTodo, selectToDo, setTodos }) => {
         <RowBox
           todos={todos}
           todo={todo}
-          setTodos={setTodos}
           selectToDo={selectToDo}
           removeTodo={removeTodo}
         />

@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import './App.css';
 import TodoForm from './components/TodoForm';
 import TodoList from './components/TodoList';
@@ -38,13 +38,9 @@ function App() {
     });
   }, [todos, filter]);
 
-  const createTodo = (newTodo) => {
-    setTodos([...todos, newTodo]);
-  };
-
   // Получаем post из дочернего элемента
   const removeTodo = (todo) => {
-    setTodos(todos.filter((t) => t.id !== todo.id));
+    setTodos(todos.filter((t) => t.name !== todo.name));
   };
 
   const selectToDo = (id) => {
@@ -55,14 +51,35 @@ function App() {
     setTodos(newTodosState);
   };
 
-  const getTodo = () => {
-    axios
-      .get('https://todo-api-learning.herokuapp.com/v1/tasks/9?order=asc')
-      .then((responce) => {
-        console.log(responce);
-        setTodos(responce.data);
-      });
+  const fetchTodos = async () => {
+    const responce = await axios.get(
+      'https://todo-api-learning.herokuapp.com/v1/tasks/3'
+    );
+    console.log(responce);
+    setTodos(responce.data);
   };
+
+  const createTodo = async (todoName) => {
+    const res = await axios.post(
+      'https://todo-api-learning.herokuapp.com/v1/task/3',
+      {
+        name: todoName,
+        done: false,
+      }
+    );
+
+    fetchTodos()
+
+    console.log(res.data);
+  };
+
+  const deleteTodo = async(todoName) => {
+    
+  }
+
+  useEffect(() => {
+    fetchTodos();
+  }, []);
 
   const [page, setPage] = useState(1);
 
@@ -83,13 +100,12 @@ function App() {
       >
         ToDo
       </Divider>
-      <TodoForm get={getTodo} create={createTodo} />
+      <TodoForm createTodo={createTodo} />
       <Row>
         <Col xs={24} md={{ span: 24, offset: 0 }}>
           <MySort setFilter={setFilter} />
           <TodoList
             todos={todos}
-            setTodos={setTodos}
             selectToDo={selectToDo}
             removeTodo={removeTodo}
             todos={sortedAndFiltredArr.slice((page - 1) * 5, page * 5)}

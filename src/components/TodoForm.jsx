@@ -1,25 +1,23 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import MyInput from './UI/input/MyInput';
 
-const TodoForm = ({ get, create }) => {
-  const [todo, setTodo] = useState({ title: '' });
+const TodoForm = ({createTodo }) => {
+
+  const [todoName, setTodoName] = useState('');
+  const [error, setError] = useState('');
+
 
   const addNewTodo = (e) => {
-    const newTodo = {
-      ...todo,
-      id: Date.now(),
-      date: new Date().toISOString(),
-    };
-    if (todo.title.trim() === '') {
+
+    if (todoName.trim() === '') {
       setError('Форма пустая');
       setTimeout(() => setError(''), 3000);
     } else {
-      create(newTodo);
-      setTodo({ title: '' });
+      createTodo(todoName)
+      setTodoName('')
     }
   };
 
-  const [error, setError] = useState('');
 
   return (
     <div>
@@ -30,14 +28,13 @@ const TodoForm = ({ get, create }) => {
         }}
       >
         <MyInput
-          onKeyDown={(e) => {
+          onKeyDown={(e) => { 
             if (e.code !== 'Enter') return;
             e.preventDefault();
             addNewTodo();
           }}
-          onClick={get}
-          onChange={(e) => setTodo({ ...todo, title: e.target.value })}
-          value={todo.title}
+          onChange={(e) => setTodoName(e.target.value)}
+          value={todoName}
           type='text'
         />
       </form>
