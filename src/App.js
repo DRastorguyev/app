@@ -40,14 +40,6 @@ function App() {
 
   // Получаем post из дочернего элемента
 
-  const selectToDo = (id) => {
-    const newTodosState = [...todos];
-    const selectedToDo = newTodosState.find((todo) => todo.id === id);
-    selectedToDo.done = !selectedToDo.done;
-
-    setTodos(newTodosState);
-  };
-
   const fetchTodos = async () => {
     const responce = await axios.get(
       'https://todo-api-learning.herokuapp.com/v1/tasks/3'
@@ -71,11 +63,21 @@ function App() {
   };
 
   const removeTodo = async (id) => {
-    await axios.delete(`https://todo-api-learning.herokuapp.com/v1/task/3/${id}`);
-    console.log('Delete successful')
+    await axios.delete(
+      `https://todo-api-learning.herokuapp.com/v1/task/3/${id}`
+    );
+    console.log('Delete successful');
 
     fetchTodos();
+  };
 
+  const patchTodo = async (id, editDate) => {
+    await axios.patch(
+      `https://todo-api-learning.herokuapp.com/v1/task/3/${id}`, editDate
+    );
+    console.log('Patch successful');
+
+    fetchTodos();
   };
 
   useEffect(() => {
@@ -101,13 +103,13 @@ function App() {
       >
         ToDo
       </Divider>
-      <TodoForm  createTodo={createTodo} />
+      <TodoForm createTodo={createTodo} />
       <Row>
         <Col xs={24} md={{ span: 24, offset: 0 }}>
           <MySort setFilter={setFilter} />
           <TodoList
+            patchTodo={patchTodo}
             todos={todos}
-            selectToDo={selectToDo}
             removeTodo={removeTodo}
             todos={sortedAndFiltredArr.slice((page - 1) * 5, page * 5)}
           />
