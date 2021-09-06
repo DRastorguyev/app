@@ -4,30 +4,12 @@ import TodoForm from './components/TodoForm';
 import TodoList from './components/TodoList';
 import MySort from './components/UI/sort/MySort';
 import { Row, Col, Divider, Pagination } from 'antd';
+import axios from 'axios';
 
 // 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
 
 function App() {
-  const [todos, setTodos] = useState([
-    {
-      id: 1,
-      title: 'Подстричься под теннис',
-      date: '2021-10-01T12:26:21.139Z',
-      done: false,
-    },
-    {
-      id: 2,
-      title: 'Купить мочалку',
-      date: '2021-07-01T12:26:21.139Z',
-      done: false,
-    },
-    {
-      id: 3,
-      title: 'Сходить на курсы по английскому',
-      date: '2021-09-01T12:26:21.139Z',
-      done: false,
-    },
-  ]);
+  const [todos, setTodos] = useState([]);
 
   const [filter, setFilter] = useState({
     sortDirection: 'ASC',
@@ -73,7 +55,18 @@ function App() {
     setTodos(newTodosState);
   };
 
+  const getTodo = () => {
+    axios
+      .get('https://todo-api-learning.herokuapp.com/v1/tasks/9?order=asc')
+      .then((responce) => {
+        console.log(responce);
+        setTodos(responce.data);
+      });
+  };
+
   const [page, setPage] = useState(1);
+
+  console.log(todos);
 
   return (
     <div className='App'>
@@ -90,11 +83,10 @@ function App() {
       >
         ToDo
       </Divider>
-      <TodoForm create={createTodo} />
+      <TodoForm get={getTodo} create={createTodo} />
       <Row>
         <Col xs={24} md={{ span: 24, offset: 0 }}>
           <MySort setFilter={setFilter} />
-
           <TodoList
             todos={todos}
             setTodos={setTodos}

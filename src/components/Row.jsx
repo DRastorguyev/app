@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Button, Col, Input, Row, Tooltip, Typography } from 'antd';
+import { Button, Col, Row, Tooltip, Typography } from 'antd';
 import Checkbox from 'antd/lib/checkbox/Checkbox';
 import { CheckCircleOutlined, DeleteOutlined } from '@ant-design/icons';
 import MyInput from './UI/input/MyInput';
@@ -57,7 +57,7 @@ const RowBox = ({  todo, setTodos, selectToDo, removeTodo }) => {
           </Row>
         </Col>
         <Col>
-          {todo.date.slice(0, 10)}
+          {/* {todo.data.slice(0, 10)} */}
           <Tooltip placement='right' title='Удалить'>
             <Button
               onClick={(e) => {
