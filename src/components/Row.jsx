@@ -4,9 +4,9 @@ import Checkbox from 'antd/lib/checkbox/Checkbox';
 import { CheckCircleOutlined, DeleteOutlined } from '@ant-design/icons';
 import MyInput from './UI/input/MyInput';
 import { List } from 'antd';
+import axios from 'axios';
 
-const RowBox = ({  todo, setTodos, selectToDo, removeTodo }) => {
-
+const RowBox = ({ todo, setTodos, selectToDo, removeTodo }) => {
   const [showInput, setShowInput] = useState(false);
 
   const editTodo = (e) => {
@@ -14,13 +14,12 @@ const RowBox = ({  todo, setTodos, selectToDo, removeTodo }) => {
     console.log(e);
     setTodos((todosState) => {
       return todosState.map((todoItem) => {
-        if (todoItem.id === todo.id)
-          return { ...todo, name: e.target.value };
+        if (todoItem.id === todo.id) return { ...todo, name: e.target.value };
         return todoItem;
       });
     });
     setShowInput(false);
-  };	
+  };
 
   return (
     <List.Item>
@@ -58,11 +57,11 @@ const RowBox = ({  todo, setTodos, selectToDo, removeTodo }) => {
         </Col>
         <Col>
           {/* {todo.data.slice(0, 10)} */}
-          <Tooltip placement='right' title='Удалить'>   
+          <Tooltip placement='right' title='Удалить'>
             <Button
               onClick={(e) => {
                 e.stopPropagation();
-                removeTodo(todo);
+                removeTodo(todo.uuid);
               }}
               style={{ marginLeft: 10 }}
               shape='circle'

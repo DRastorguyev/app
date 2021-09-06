@@ -39,9 +39,6 @@ function App() {
   }, [todos, filter]);
 
   // Получаем post из дочернего элемента
-  const removeTodo = (todo) => {
-    setTodos(todos.filter((t) => t.name !== todo.name));
-  };
 
   const selectToDo = (id) => {
     const newTodosState = [...todos];
@@ -68,14 +65,18 @@ function App() {
       }
     );
 
-    fetchTodos()
+    fetchTodos();
 
     console.log(res.data);
   };
 
-  const deleteTodo = async(todoName) => {
-    
-  }
+  const removeTodo = async (id) => {
+    await axios.delete(`https://todo-api-learning.herokuapp.com/v1/task/3/${id}`);
+    console.log('Delete successful')
+
+    fetchTodos();
+
+  };
 
   useEffect(() => {
     fetchTodos();
@@ -100,7 +101,7 @@ function App() {
       >
         ToDo
       </Divider>
-      <TodoForm createTodo={createTodo} />
+      <TodoForm  createTodo={createTodo} />
       <Row>
         <Col xs={24} md={{ span: 24, offset: 0 }}>
           <MySort setFilter={setFilter} />

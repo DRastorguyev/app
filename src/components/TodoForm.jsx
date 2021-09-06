@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import MyInput from './UI/input/MyInput';
 
-const TodoForm = ({createTodo }) => {
+const TodoForm = ({createTodo}) => {
 
   const [todoName, setTodoName] = useState('');
   const [error, setError] = useState('');
