@@ -4,20 +4,13 @@ import Checkbox from 'antd/lib/checkbox/Checkbox';
 import { CheckCircleOutlined, DeleteOutlined } from '@ant-design/icons';
 import MyInput from './UI/input/MyInput';
 import { List } from 'antd';
-import axios from 'axios';
 
-const RowBox = ({ todo, setTodos, selectToDo, removeTodo }) => {
+const RowBox = ({ todo, removeTodo, patchTodo }) => {
   const [showInput, setShowInput] = useState(false);
 
   const editTodo = (e) => {
     if (e.code !== 'Enter') return;
-    console.log(e);
-    setTodos((todosState) => {
-      return todosState.map((todoItem) => {
-        if (todoItem.id === todo.id) return { ...todo, name: e.target.value };
-        return todoItem;
-      });
-    });
+    patchTodo(todo.uuid, { name: e.target.value });
     setShowInput(false);
   };
 
@@ -33,12 +26,12 @@ const RowBox = ({ todo, setTodos, selectToDo, removeTodo }) => {
             align='middle'
           >
             <Checkbox
+              checked={todo.done ? true : false}
               onClick={(e) => {
                 e.stopPropagation();
-                selectToDo(todo.id);
+                patchTodo(todo.uuid, { done: todo.done ? false : true });
               }}
               style={{ marginRight: 10 }}
-              icon={<CheckCircleOutlined />}
             />
             <Typography>
               {showInput ? (
@@ -56,14 +49,14 @@ const RowBox = ({ todo, setTodos, selectToDo, removeTodo }) => {
           </Row>
         </Col>
         <Col>
-          {/* {todo.data.slice(0, 10)} */}
+          {todo.createdAt.slice(11, 19)}
           <Tooltip placement='right' title='Удалить'>
             <Button
               onClick={(e) => {
                 e.stopPropagation();
                 removeTodo(todo.uuid);
               }}
-              style={{ marginLeft: 10 }}
+              style={{ marginLeft: 85 }}
               shape='circle'
               size='small'
               icon={<DeleteOutlined />}

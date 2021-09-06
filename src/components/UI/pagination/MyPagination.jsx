@@ -2,13 +2,7 @@ import React from "react";
 import MyButton from "../button/MyButton";
 import cl from "../pagination/MyPagination.module.css";
 
-const MyPagination = ({lastPage, ...props}) => {
-
-  const pageArr = []
-
-  for (let i = 1; i <= lastPage; i++) pageArr.push(i)
-
-  
+const MyPagination = ({...props}) => {
 
 
   return (

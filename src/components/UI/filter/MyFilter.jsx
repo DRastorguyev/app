@@ -21,6 +21,8 @@ const MyFilter = ({ setFilter }) => {
     };
   };
 
+  
+
   return (
     <div className={cl.myFilter}>
       <div>

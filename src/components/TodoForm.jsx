@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import MyInput from './UI/input/MyInput';
 
 const TodoForm = ({createTodo}) => {

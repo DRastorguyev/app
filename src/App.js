@@ -3,7 +3,7 @@ import './App.css';
 import TodoForm from './components/TodoForm';
 import TodoList from './components/TodoList';
 import MySort from './components/UI/sort/MySort';
-import { Row, Col, Divider, Pagination } from 'antd';
+import { Row, Col, Pagination } from 'antd';
 import axios from 'axios';
 
 // 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
@@ -38,19 +38,16 @@ function App() {
     });
   }, [todos, filter]);
 
-  // Получаем post из дочернего элемента
-
   const fetchTodos = async () => {
     const responce = await axios.get(
-      'https://todo-api-learning.herokuapp.com/v1/tasks/3'
+      'https://todo-api-learning.herokuapp.com/v1/tasks/1'
     );
-    console.log(responce);
     setTodos(responce.data);
   };
 
   const createTodo = async (todoName) => {
     const res = await axios.post(
-      'https://todo-api-learning.herokuapp.com/v1/task/3',
+      'https://todo-api-learning.herokuapp.com/v1/task/1',
       {
         name: todoName,
         done: false,
@@ -58,24 +55,21 @@ function App() {
     );
 
     fetchTodos();
-
-    console.log(res.data);
   };
 
   const removeTodo = async (id) => {
     await axios.delete(
-      `https://todo-api-learning.herokuapp.com/v1/task/3/${id}`
+      `https://todo-api-learning.herokuapp.com/v1/task/1/${id}`
     );
-    console.log('Delete successful');
 
     fetchTodos();
   };
 
   const patchTodo = async (id, editDate) => {
     await axios.patch(
-      `https://todo-api-learning.herokuapp.com/v1/task/3/${id}`, editDate
+      `https://todo-api-learning.herokuapp.com/v1/task/1/${id}`,
+      editDate
     );
-    console.log('Patch successful');
 
     fetchTodos();
   };
@@ -86,23 +80,19 @@ function App() {
 
   const [page, setPage] = useState(1);
 
-  console.log(todos);
-
   return (
     <div className='App'>
-      <Divider
-        orientation='left'
-        level={1}
+      <h1
         style={{
           textAlign: 'center',
-          paddingTop: 10,
-          marginBottom: 10,
+          paddingTop: 5,
+          marginBottom: 5,
           fontSize: 45,
           fontWeight: 100,
         }}
       >
         ToDo
-      </Divider>
+      </h1>
       <TodoForm createTodo={createTodo} />
       <Row>
         <Col xs={24} md={{ span: 24, offset: 0 }}>
