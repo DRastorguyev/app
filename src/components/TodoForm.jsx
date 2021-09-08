@@ -1,23 +1,17 @@
 import React, { useState } from 'react';
 import MyInput from './UI/input/MyInput';
 
-const TodoForm = ({createTodo}) => {
-
+const TodoForm = ({ createTodo }) => {
   const [todoName, setTodoName] = useState('');
-  const [error, setError] = useState('');
-
 
   const addNewTodo = (e) => {
-
     if (todoName.trim() === '') {
-      setError('Форма пустая');
-      setTimeout(() => setError(''), 3000);
+      alert('Форма пустая');
     } else {
-      createTodo(todoName)
-      setTodoName('')
+      createTodo(todoName);
+      setTodoName('');
     }
   };
-
 
   return (
     <div>
@@ -28,7 +22,7 @@ const TodoForm = ({createTodo}) => {
         }}
       >
         <MyInput
-          onKeyDown={(e) => { 
+          onKeyDown={(e) => {
             if (e.code !== 'Enter') return;
             e.preventDefault();
             addNewTodo();
@@ -38,11 +32,6 @@ const TodoForm = ({createTodo}) => {
           type='text'
         />
       </form>
-      {error && (
-        <div style={{ color: 'red', marginBottom: 30, fontSize: 12 }}>
-          {error}
-        </div>
-      )}
     </div>
   );
 };

@@ -1,10 +1,8 @@
 import { Button } from 'antd';
-import axios from 'axios';
 import React from 'react';
 import cl from '../sort/MySort.module.css';
 
 const MySort = ({ setFilter }) => {
-
   const filterButtonHandler = (filterType) => {
     return () => {
       setFilter((filterState) => ({ ...filterState, filterType }));
@@ -16,8 +14,8 @@ const MySort = ({ setFilter }) => {
       setFilter((filterState) => ({ ...filterState, sortDirection }));
     };
   };
-    
-    return (
+
+  return (
     <div className={cl.mySort}>
       <div>
         <Button

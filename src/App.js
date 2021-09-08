@@ -12,15 +12,21 @@ function App() {
   const [todos, setTodos] = useState([]);
 
   const [filter, setFilter] = useState({
-    sortDirection: 'ASC',
-    filterType: 'ALL',
+    sortDirection: 'asc',
+    filterType: 'all',
   });
 
   const fetchTodos = async () => {
+    const params = { order: filter.sortDirection };
+
+    if (filter.filterType === 'done' || filter.filterType === 'undone')
+      params.filterBy = filter.filterType;
     const responce = await axios.get(
       'https://todo-api-learning.herokuapp.com/v1/tasks/1',
-      { params: { filterBy: filter.filterType, order: filter.sortDirection } }
+      { params }
     );
+
+    console.log(responce.data);
 
     setTodos(responce.data);
   };
