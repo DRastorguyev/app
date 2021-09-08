@@ -1,3 +1,4 @@
+import { message } from 'antd';
 import React, { useState } from 'react';
 import MyInput from './UI/input/MyInput';
 
@@ -6,7 +7,7 @@ const TodoForm = ({ createTodo }) => {
 
   const addNewTodo = (e) => {
     if (todoName.trim() === '') {
-      alert('Форма пустая');
+      message.error('Форма пустая')
     } else {
       createTodo(todoName);
       setTodoName('');

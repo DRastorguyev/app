@@ -6,7 +6,7 @@ import MySort from './components/UI/sort/MySort';
 import { Row, Col, Pagination } from 'antd';
 import axios from 'axios';
 
-// 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
+// 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
 
 function App() {
   const [todos, setTodos] = useState([]);
@@ -15,6 +15,13 @@ function App() {
     sortDirection: 'asc',
     filterType: 'all',
   });
+
+  // const deleteTodo = (id) => {
+  //   setTodos(todoState => {
+  //     return [...todoState].filter(todo => todo.id === id)
+  //   })
+  //   console.log(id);
+  // }
 
   const fetchTodos = async () => {
     const params = { order: filter.sortDirection };
@@ -25,8 +32,6 @@ function App() {
       'https://todo-api-learning.herokuapp.com/v1/tasks/1',
       { params }
     );
-
-    console.log(responce.data);
 
     setTodos(responce.data);
   };
@@ -51,12 +56,12 @@ function App() {
     fetchTodos();
   };
 
+
   const patchTodo = async (id, editDate) => {
     await axios.patch(
       `https://todo-api-learning.herokuapp.com/v1/task/1/${id}`,
       editDate
     );
-
     fetchTodos();
   };
 
