@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
-import { Button, Col, Row, Tooltip, Typography } from 'antd';
+import { Button, Col, Row, Tooltip, Typography, Input } from 'antd';
 import Checkbox from 'antd/lib/checkbox/Checkbox';
 import { DeleteOutlined } from '@ant-design/icons';
-import MyInput from './UI/input/MyInput';
 import { List } from 'antd';
 
 const RowBox = ({ todo, removeTodo, patchTodo }) => {
@@ -16,7 +15,10 @@ const RowBox = ({ todo, removeTodo, patchTodo }) => {
 
   return (
     <List.Item>
-      <Row justify='space-between' style={{ width: '100%' }}>
+      <Row
+        justify='space-between'
+        style={{ width: '100%', alignItems: 'center' }}
+      >
         <Col style={{ cursor: 'pointer' }}>
           <Row
             onClick={(e) => {
@@ -35,8 +37,8 @@ const RowBox = ({ todo, removeTodo, patchTodo }) => {
             />
             <Typography>
               {showInput ? (
-                <MyInput
-                  style={{ marginTop: 30 }}
+                <Input
+                  size='small'
                   autoFocus
                   onBlur={() => setShowInput(false)}
                   onKeyDown={editTodo}

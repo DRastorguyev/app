@@ -3,7 +3,7 @@ import './App.css';
 import TodoForm from './components/TodoForm';
 import TodoList from './components/TodoList';
 import MySort from './components/UI/sort/MySort';
-import { Row, Col, Pagination } from 'antd';
+import { Row, Col, Pagination, message } from 'antd';
 import axios from 'axios';
 
 // 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
@@ -32,7 +32,6 @@ function App() {
       'https://todo-api-learning.herokuapp.com/v1/tasks/1',
       { params }
     );
-
     setTodos(responce.data);
   };
 
@@ -43,7 +42,13 @@ function App() {
         done: false,
       });
     } catch (error) {
-      alert('Так писать нельзя!');
+      if (error.message === 'Request failed with status code 422') {
+        message.error(
+          'Validation error: Message must be at least 2 characters long name in body'
+        );
+      } else {
+        message.error('Task with the same name exists');
+      }
     }
 
     fetchTodos();
@@ -55,7 +60,6 @@ function App() {
     );
     fetchTodos();
   };
-
 
   const patchTodo = async (id, editDate) => {
     await axios.patch(
