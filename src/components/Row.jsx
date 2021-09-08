@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Button, Col, Row, Tooltip, Typography } from 'antd';
 import Checkbox from 'antd/lib/checkbox/Checkbox';
-import { CheckCircleOutlined, DeleteOutlined } from '@ant-design/icons';
+import { DeleteOutlined } from '@ant-design/icons';
 import MyInput from './UI/input/MyInput';
 import { List } from 'antd';
 

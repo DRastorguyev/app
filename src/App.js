@@ -6,7 +6,7 @@ import MySort from './components/UI/sort/MySort';
 import { Row, Col, Pagination } from 'antd';
 import axios from 'axios';
 
-// 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
+// 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
 
 function App() {
   const [todos, setTodos] = useState([]);
@@ -16,34 +16,17 @@ function App() {
     filterType: 'ALL',
   });
 
-  const sortedAndFiltredArr = useMemo(() => {
-    let filtredArr = [];
-
-    switch (filter.filterType) {
-      case 'DONE':
-        filtredArr = todos.filter((todo) => todo.done);
-        break;
-      case 'UNDONE':
-        filtredArr = todos.filter((todo) => !todo.done);
-        break;
-      default:
-        filtredArr = todos;
-        break;
-    }
-
-    return filtredArr.sort((a, b) => {
-      if (filter.sortDirection === 'ASC')
-        return new Date(a.date).getTime() - new Date(b.date).getTime();
-      return new Date(b.date).getTime() - new Date(a.date).getTime();
-    });
-  }, [todos, filter]);
-
   const fetchTodos = async () => {
     const responce = await axios.get(
-      'https://todo-api-learning.herokuapp.com/v1/tasks/1'
+      'https://todo-api-learning.herokuapp.com/v1/tasks/1', {params: {filterBy: filter.filterType, order: filter.sortDirection}}
     );
+
+    console.log(responce);
+
     setTodos(responce.data);
   };
+
+  console.log(filter);
 
   const createTodo = async (todoName) => {
     const res = await axios.post(
@@ -76,7 +59,7 @@ function App() {
 
   useEffect(() => {
     fetchTodos();
-  }, []);
+  }, [filter]);
 
   const [page, setPage] = useState(1);
 
@@ -96,18 +79,20 @@ function App() {
       <TodoForm createTodo={createTodo} />
       <Row>
         <Col xs={24} md={{ span: 24, offset: 0 }}>
-          <MySort setFilter={setFilter} />
+          <MySort
+            fetchTodos={fetchTodos}
+            setFilter={setFilter}
+          />
           <TodoList
             patchTodo={patchTodo}
-            todos={todos}
             removeTodo={removeTodo}
-            todos={sortedAndFiltredArr.slice((page - 1) * 5, page * 5)}
+            todos={todos.slice((page - 1) * 5, page * 5)}
           />
           <Pagination
             pageSize={5}
             current={page}
             onChange={(newPage) => setPage(newPage)}
-            total={sortedAndFiltredArr.length}
+            total={todos.length}
           />
         </Col>
       </Row>

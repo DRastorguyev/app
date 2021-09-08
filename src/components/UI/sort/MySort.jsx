@@ -1,8 +1,10 @@
 import { Button } from 'antd';
+import axios from 'axios';
 import React from 'react';
 import cl from '../sort/MySort.module.css';
 
 const MySort = ({ setFilter }) => {
+
   const filterButtonHandler = (filterType) => {
     return () => {
       setFilter((filterState) => ({ ...filterState, filterType }));
@@ -14,8 +16,8 @@ const MySort = ({ setFilter }) => {
       setFilter((filterState) => ({ ...filterState, sortDirection }));
     };
   };
-
-  return (
+    
+    return (
     <div className={cl.mySort}>
       <div>
         <Button
@@ -23,7 +25,7 @@ const MySort = ({ setFilter }) => {
           style={{ marginRight: 10 }}
           type='ghost'
           shape='round'
-          onClick={filterButtonHandler('ALL')}
+          onClick={filterButtonHandler('')}
         >
           Все
         </Button>
@@ -32,7 +34,7 @@ const MySort = ({ setFilter }) => {
           style={{ marginRight: 10 }}
           type='ghost'
           shape='round'
-          onClick={filterButtonHandler('DONE')}
+          onClick={filterButtonHandler('done')}
         >
           Готовые
         </Button>
@@ -41,7 +43,7 @@ const MySort = ({ setFilter }) => {
           style={{ marginRight: 10 }}
           type='ghost'
           shape='round'
-          onClick={filterButtonHandler('UNDONE')}
+          onClick={filterButtonHandler('undone')}
         >
           Активные
         </Button>
@@ -53,7 +55,7 @@ const MySort = ({ setFilter }) => {
           style={{ marginRight: 10 }}
           type='ghost'
           shape='round'
-          onClick={sortButtonHandler('ASC')}
+          onClick={sortButtonHandler('asc')}
         >
           <i className='fas fa-chevron-up'></i>
         </Button>
@@ -62,7 +64,7 @@ const MySort = ({ setFilter }) => {
           style={{ marginRight: 10 }}
           type='ghost'
           shape='round'
-          onClick={sortButtonHandler('DESC')}
+          onClick={sortButtonHandler('desc')}
         >
           <i className='fas fa-chevron-down'></i>
         </Button>
