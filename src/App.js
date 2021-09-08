@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useState } from 'react';
 import './App.css';
 import TodoForm from './components/TodoForm';
 import TodoList from './components/TodoList';
@@ -18,24 +18,22 @@ function App() {
 
   const fetchTodos = async () => {
     const responce = await axios.get(
-      'https://todo-api-learning.herokuapp.com/v1/tasks/1', {params: {filterBy: filter.filterType, order: filter.sortDirection}}
+      'https://todo-api-learning.herokuapp.com/v1/tasks/1',
+      { params: { filterBy: filter.filterType, order: filter.sortDirection } }
     );
-
-    console.log(responce);
 
     setTodos(responce.data);
   };
 
-  console.log(filter);
-
   const createTodo = async (todoName) => {
-    const res = await axios.post(
-      'https://todo-api-learning.herokuapp.com/v1/task/1',
-      {
+    try {
+      await axios.post('https://todo-api-learning.herokuapp.com/v1/task/1', {
         name: todoName,
         done: false,
-      }
-    );
+      });
+    } catch (error) {
+      alert('Так писать нельзя!');
+    }
 
     fetchTodos();
   };
@@ -44,7 +42,6 @@ function App() {
     await axios.delete(
       `https://todo-api-learning.herokuapp.com/v1/task/1/${id}`
     );
-
     fetchTodos();
   };
 
@@ -79,10 +76,7 @@ function App() {
       <TodoForm createTodo={createTodo} />
       <Row>
         <Col xs={24} md={{ span: 24, offset: 0 }}>
-          <MySort
-            fetchTodos={fetchTodos}
-            setFilter={setFilter}
-          />
+          <MySort fetchTodos={fetchTodos} setFilter={setFilter} />
           <TodoList
             patchTodo={patchTodo}
             removeTodo={removeTodo}
