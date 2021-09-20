@@ -6,10 +6,11 @@ import { List } from 'antd';
 
 const RowBox = ({ todo, removeTodo, patchTodo }) => {
   const [showInput, setShowInput] = useState(false);
+  const [clicked, setClicked] = useState(true)
 
   const editTodo = (e) => {
     if (e.code !== 'Enter') return;
-    patchTodo(todo.uuid, { name: e.target.value });
+    patchTodo(todo.id, { title: e.target.value });
     setShowInput(false);
   };
 
@@ -31,7 +32,7 @@ const RowBox = ({ todo, removeTodo, patchTodo }) => {
               checked={todo.done ? true : false}
               onClick={(e) => {
                 e.stopPropagation();
-                patchTodo(todo.uuid, { done: todo.done ? false : true });
+                patchTodo(todo.id, { done: todo.done ? false : true });
               }}
               style={{ marginRight: 10 }}
             />
@@ -42,21 +43,23 @@ const RowBox = ({ todo, removeTodo, patchTodo }) => {
                   autoFocus
                   onBlur={() => setShowInput(false)}
                   onKeyDown={editTodo}
-                  defaultValue={todo.name}
+                  defaultValue={todo.title}
                 />
               ) : (
-                todo.name
+                todo.title
               )}
             </Typography>
           </Row>
         </Col>
         <Col>
           {todo.createdAt.slice(11, 19)}
-          <Tooltip placement='right' title='Удалить'>
+          <Tooltip placement='right' title='Delete'>
             <Button
+              disabled={!clicked}
               onClick={(e) => {
                 e.stopPropagation();
-                removeTodo(todo.uuid);
+                setClicked(false);
+                removeTodo(todo.id);
               }}
               style={{ marginLeft: 85 }}
               shape='circle'

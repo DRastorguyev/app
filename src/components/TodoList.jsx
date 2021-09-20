@@ -9,6 +9,7 @@ const TodoList = ({ todos, removeTodo, selectToDo, patchTodo }) => {
       dataSource={todos}
       renderItem={(todo) => (
         <RowBox
+          key={todo.id}
           patchTodo={patchTodo}
           todos={todos}
           todo={todo}

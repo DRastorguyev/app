@@ -4,9 +4,7 @@ import TodoForm from './components/TodoForm';
 import TodoList from './components/TodoList';
 import MySort from './components/UI/sort/MySort';
 import { Row, Col, Pagination, message } from 'antd';
-import axios from 'axios';
-
-// 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
+import ax from 'axios';
 
 function App() {
   const [todos, setTodos] = useState([]);
@@ -16,29 +14,23 @@ function App() {
     filterType: 'all',
   });
 
-  // const deleteTodo = (id) => {
-  //   setTodos(todoState => {
-  //     return [...todoState].filter(todo => todo.id === id)
-  //   })
-  //   console.log(id);
-  // }
+  const axios = ax.create({
+    baseURL: 'http://localhost:2000',
+  });
 
   const fetchTodos = async () => {
-    const params = { order: filter.sortDirection };
+    // const params = { order: filter.sortDirection };
 
-    if (filter.filterType === 'done' || filter.filterType === 'undone')
-      params.filterBy = filter.filterType;
-    const responce = await axios.get(
-      'https://todo-api-learning.herokuapp.com/v1/tasks/1',
-      { params }
-    );
+    // if (filter.filterType === 'done' || filter.filterType === 'undone')
+    //   params.filterBy = filter.filterType;
+    const responce = await axios.get('/todos');
     setTodos(responce.data);
   };
 
   const createTodo = async (todoName) => {
     try {
-      await axios.post('https://todo-api-learning.herokuapp.com/v1/task/1', {
-        name: todoName,
+      await axios.post('/todo', {
+        title: todoName,
         done: false,
       });
     } catch (error) {
@@ -55,17 +47,12 @@ function App() {
   };
 
   const removeTodo = async (id) => {
-    await axios.delete(
-      `https://todo-api-learning.herokuapp.com/v1/task/1/${id}`
-    );
+    await axios.delete(`/todo/${id}`);
     fetchTodos();
   };
 
   const patchTodo = async (id, editDate) => {
-    await axios.patch(
-      `https://todo-api-learning.herokuapp.com/v1/task/1/${id}`,
-      editDate
-    );
+    await axios.patch(`/todos/${id}`, editDate);
     fetchTodos();
   };
 

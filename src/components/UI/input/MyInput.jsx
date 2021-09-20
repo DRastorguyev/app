@@ -6,7 +6,7 @@ const MyInput = (props) => {
   
   return (
     <div>
-      <Input {...props} placeholder='Купить молочка...' />
+      <Input {...props} placeholder='Buy milk...' />
     </div>
   );
 };

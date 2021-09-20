@@ -7,7 +7,7 @@ const TodoForm = ({ createTodo }) => {
 
   const addNewTodo = (e) => {
     if (todoName.trim() === '') {
-      message.error('Форма пустая')
+      message.error('Form is empty')
     } else {
       createTodo(todoName);
       setTodoName('');

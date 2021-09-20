@@ -25,7 +25,7 @@ const MySort = ({ setFilter }) => {
           shape='round'
           onClick={filterButtonHandler('')}
         >
-          Все
+          All
         </Button>
         <Button
           size='small'
@@ -34,7 +34,7 @@ const MySort = ({ setFilter }) => {
           shape='round'
           onClick={filterButtonHandler('done')}
         >
-          Готовые
+          Done
         </Button>
         <Button
           size='small'
@@ -43,11 +43,11 @@ const MySort = ({ setFilter }) => {
           shape='round'
           onClick={filterButtonHandler('undone')}
         >
-          Активные
+          In process
         </Button>
       </div>
       <div className={cl.sort__btn}>
-        <p style={{ marginRight: 5, marginBottom: 0 }}>Отсортировать по дате</p>
+        <p style={{ marginRight: 5, marginBottom: 0 }}>Sort by date</p>
         <Button
           size='small'
           style={{ marginRight: 10 }}
