@@ -21,7 +21,7 @@ body {
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
-  backdrop-filter: blur(7px) contrast(70%);
+  backdrop-filter: blur(25px) contrast(60%);
 }
 
 

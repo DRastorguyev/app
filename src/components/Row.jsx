@@ -15,7 +15,7 @@ const RowBox = ({ todo, removeTodo, patchTodo }) => {
   };
 
   return (
-    <List.Item>
+    <List.Item style={{borderBottom: '1px solid #f0f0f042'}}>
       <Row
         justify='space-between'
         style={{ width: '100%', alignItems: 'center', color: '#fff' }}
@@ -36,7 +36,7 @@ const RowBox = ({ todo, removeTodo, patchTodo }) => {
               }}
               style={{ marginRight: 10 }}
             />
-            <Typography style={{ color: '#fff' }}>
+            <Typography style={{ color: '#fff', fontSize: 15 }}>
               {showInput ? (
                 <Input
                   size='small'
