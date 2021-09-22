@@ -6,6 +6,7 @@ import TodoList from './components/TodoList';
 import MySort from './components/UI/sort/MySort';
 import { Row, Col, Pagination, message } from 'antd';
 import ax from 'axios';
+import { $authHost } from './http/index';
 
 function App() {
   const [todos, setTodos] = useState([]);
@@ -15,19 +16,13 @@ function App() {
     filterType: 'all',
   });
 
-  const axios = ax.create({
-    baseURL: 'http://localhost:2000',
-  });
-
   const fetchTodos = async () => {
     const params = { order: filter.sortDirection };
 
     if (filter.filterType === 'done' || filter.filterType === 'undone')
       params.filterBy = filter.filterType;
 
-    console.log(params);
-
-    const responce = await axios.get('/todos', {
+    const responce = await $authHost.get('/todos', {
       params,
     });
 
@@ -36,7 +31,7 @@ function App() {
 
   const createTodo = async (todoName) => {
     try {
-      await axios.post('/todo', {
+      await $authHost.post('/todo', {
         title: todoName,
         done: false,
       });
@@ -54,13 +49,13 @@ function App() {
   };
 
   const removeTodo = async (id) => {
-    await axios.delete(`/todo/${id}`);
+    await $authHost.delete(`/todo/${id}`);
     fetchTodos();
   };
 
   const patchTodo = async (id, editDate) => {
     console.log(editDate);
-    await axios.patch(`/todos/${id}`, editDate);
+    await $authHost.patch(`/todos/${id}`, editDate);
     fetchTodos();
   };
 
@@ -84,6 +79,8 @@ function App() {
             todos={todos.slice((page - 1) * 5, page * 5)}
           />
           <Pagination
+            hideOnSinglePage={true}
+            size='small'
             style={{ marginTop: 65 }}
             pageSize={5}
             current={page}
