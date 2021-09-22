@@ -4,64 +4,36 @@
 
   box-sizing: border-box;
 
-  font-family: 'Open Sans', sans-serif;
+  font-family: 'Lato', sans-serif;
+
+  font-weight: 600;
 }
 
 .App {
-  margin-top: 100px;
-  padding: 0 40px 40px 40px;
-  width: 800px;
+  padding: 50px 120px 120px 120px;
+  width: 100%;
 
-  background-color: rgba(0, 0, 0, 0.021);
-
-  border-radius: 5px;
-  box-shadow:  20px 20px 60px #2e2a2e1e,
-             -20px -20px 60px #75707525;
 }
+
+body {
+  background: url('https://images.pexels.com/photos/1287145/pexels-photo-1287145.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260') no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  backdrop-filter: blur(7px) contrast(70%);
+}
+
 
 #root {
   display: flex;
   justify-content: center;
 }
 
-.todo {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
 
-  padding: 15px 35px;
-  margin-top: 25px;
-
-  border-radius: 2px;
-
-  box-shadow: 3px 1px 4px rgba(97, 88, 97, 0.315);
-
-  transition: all ease .10s;
-}
-
-.todo:hover {
-  border-radius: 10px;
-  background: rgba(120, 108, 121, 0.103);
-  box-shadow: 1px 0px 4px rgba(36, 33, 36, 0.78);
-
-  cursor: pointer;
-
-  text-decoration: underline;
-}
-
-.todoDone {
-  transition: all .6s ease-out;
-  box-shadow: none;
-
-  background: rgba(49, 47, 47, 0.308);
-}
-
-.todoDone:hover {
-  background: rgba(29, 28, 29, 0.253);
-
-  box-shadow: none;
-}
-
-.deleteBtn:hover {
-  color: white
+.title {
+  text-align: center;
+  font-size: 55px;
+  font-weight: 300;
+  margin-bottom: 35px;
 }

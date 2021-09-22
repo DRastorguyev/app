@@ -19,7 +19,8 @@ const TodoForm = ({ createTodo }) => {
       <form
         style={{
           alignItems: 'center',
-          paddingTop: 10,
+          paddingTop: 5,
+          paddingBottom: 10,
         }}
       >
         <MyInput

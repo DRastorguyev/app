@@ -5,6 +5,7 @@ import RowBox from './Row';
 const TodoList = ({ todos, removeTodo, selectToDo, patchTodo }) => {
   return (
     <List
+      style={{marginTop: 35}}
       size='large'
       dataSource={todos}
       renderItem={(todo) => (

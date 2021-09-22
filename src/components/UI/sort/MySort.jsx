@@ -20,7 +20,7 @@ const MySort = ({ setFilter }) => {
       <div>
         <Button
           size='small'
-          style={{ marginRight: 10 }}
+          style={{ marginRight: 10, color: '#fff' }}
           type='ghost'
           shape='round'
           onClick={filterButtonHandler('')}
@@ -29,7 +29,7 @@ const MySort = ({ setFilter }) => {
         </Button>
         <Button
           size='small'
-          style={{ marginRight: 10 }}
+          style={{ marginRight: 10, color: '#fff' }}
           type='ghost'
           shape='round'
           onClick={filterButtonHandler('done')}
@@ -38,7 +38,7 @@ const MySort = ({ setFilter }) => {
         </Button>
         <Button
           size='small'
-          style={{ marginRight: 10 }}
+          style={{ marginRight: 10, color: '#fff'}}
           type='ghost'
           shape='round'
           onClick={filterButtonHandler('undone')}
@@ -47,10 +47,10 @@ const MySort = ({ setFilter }) => {
         </Button>
       </div>
       <div className={cl.sort__btn}>
-        <p style={{ marginRight: 5, marginBottom: 0 }}>Sort by date</p>
+        <p style={{ marginRight: 23, marginBottom: 0, color: '#fff' }}>Sort by date</p>
         <Button
           size='small'
-          style={{ marginRight: 10 }}
+          style={{ marginRight: 10, color: '#fff'}}
           type='ghost'
           shape='round'
           onClick={sortButtonHandler('asc')}
@@ -59,7 +59,7 @@ const MySort = ({ setFilter }) => {
         </Button>
         <Button
           size='small'
-          style={{ marginRight: 10 }}
+          style={{ marginRight: 10, color: '#fff'}}
           type='ghost'
           shape='round'
           onClick={sortButtonHandler('desc')}

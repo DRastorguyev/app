@@ -6,7 +6,7 @@ import { List } from 'antd';
 
 const RowBox = ({ todo, removeTodo, patchTodo }) => {
   const [showInput, setShowInput] = useState(false);
-  const [clicked, setClicked] = useState(true)
+  const [clicked, setClicked] = useState(true);
 
   const editTodo = (e) => {
     if (e.code !== 'Enter') return;
@@ -18,7 +18,7 @@ const RowBox = ({ todo, removeTodo, patchTodo }) => {
     <List.Item>
       <Row
         justify='space-between'
-        style={{ width: '100%', alignItems: 'center' }}
+        style={{ width: '100%', alignItems: 'center', color: '#fff' }}
       >
         <Col style={{ cursor: 'pointer' }}>
           <Row
@@ -36,7 +36,7 @@ const RowBox = ({ todo, removeTodo, patchTodo }) => {
               }}
               style={{ marginRight: 10 }}
             />
-            <Typography>
+            <Typography style={{ color: '#fff' }}>
               {showInput ? (
                 <Input
                   size='small'
@@ -61,7 +61,7 @@ const RowBox = ({ todo, removeTodo, patchTodo }) => {
                 setClicked(false);
                 removeTodo(todo.id);
               }}
-              style={{ marginLeft: 85 }}
+              style={{ marginLeft: 65, marginRight: 18 }}
               shape='circle'
               size='small'
               icon={<DeleteOutlined />}

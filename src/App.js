@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import './App.css';
 import TodoForm from './components/TodoForm';
+import Header from './components/UI/headerAuth/Header';
 import TodoList from './components/TodoList';
 import MySort from './components/UI/sort/MySort';
 import { Row, Col, Pagination, message } from 'antd';
@@ -19,11 +20,17 @@ function App() {
   });
 
   const fetchTodos = async () => {
-    // const params = { order: filter.sortDirection };
+    const params = { order: filter.sortDirection };
 
-    // if (filter.filterType === 'done' || filter.filterType === 'undone')
-    //   params.filterBy = filter.filterType;
-    const responce = await axios.get('/todos');
+    if (filter.filterType === 'done' || filter.filterType === 'undone')
+      params.filterBy = filter.filterType;
+
+    console.log(params);
+
+    const responce = await axios.get('/todos', {
+      params,
+    });
+
     setTodos(responce.data);
   };
 
@@ -52,6 +59,7 @@ function App() {
   };
 
   const patchTodo = async (id, editDate) => {
+    console.log(editDate);
     await axios.patch(`/todos/${id}`, editDate);
     fetchTodos();
   };
@@ -64,17 +72,8 @@ function App() {
 
   return (
     <div className='App'>
-      <h1
-        style={{
-          textAlign: 'center',
-          paddingTop: 5,
-          marginBottom: 5,
-          fontSize: 45,
-          fontWeight: 100,
-        }}
-      >
-        ToDo
-      </h1>
+      <Header />
+      <h1 className='title'>ToDo</h1>
       <TodoForm createTodo={createTodo} />
       <Row>
         <Col xs={24} md={{ span: 24, offset: 0 }}>
@@ -85,6 +84,7 @@ function App() {
             todos={todos.slice((page - 1) * 5, page * 5)}
           />
           <Pagination
+            style={{ marginTop: 65 }}
             pageSize={5}
             current={page}
             onChange={(newPage) => setPage(newPage)}

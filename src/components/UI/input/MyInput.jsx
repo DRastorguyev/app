@@ -6,7 +6,7 @@ const MyInput = (props) => {
   
   return (
     <div>
-      <Input {...props} placeholder='Buy milk...' />
+      <Input style={{borderRadius: 10, height: 35}} {...props} placeholder='Buy milk...' />
     </div>
   );
 };
