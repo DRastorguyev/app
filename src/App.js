@@ -5,7 +5,6 @@ import Header from './components/UI/headerAuth/Header';
 import TodoList from './components/TodoList';
 import MySort from './components/UI/sort/MySort';
 import { Row, Col, Pagination, message } from 'antd';
-import ax from 'axios';
 import { $authHost } from './http/index';
 
 function App() {
@@ -16,17 +15,24 @@ function App() {
     filterType: 'all',
   });
 
+  const [isAuth, setIsAuth] = useState(false);
+
   const fetchTodos = async () => {
-    const params = { order: filter.sortDirection };
+    try {
+      const params = { order: filter.sortDirection };
 
-    if (filter.filterType === 'done' || filter.filterType === 'undone')
-      params.filterBy = filter.filterType;
+      if (filter.filterType === 'done' || filter.filterType === 'undone')
+        params.filterBy = filter.filterType;
 
-    const responce = await $authHost.get('/todos', {
-      params,
-    });
+      const responce = await $authHost.get('/todos', {
+        params,
+      });
 
-    setTodos(responce.data);
+      console.log(responce.data);
+      setTodos(responce.data);
+    } catch (error) {
+      setTodos([]);
+    }
   };
 
   const createTodo = async (todoName) => {
@@ -61,13 +67,17 @@ function App() {
 
   useEffect(() => {
     fetchTodos();
-  }, [filter]);
+  }, [filter, isAuth]);
+
+  useEffect(() => {
+    setIsAuth(!!localStorage.getItem('token'))
+  })
 
   const [page, setPage] = useState(1);
 
   return (
     <div className='App'>
-      <Header />
+      <Header setIsAuth={setIsAuth} isAuth={isAuth} />
       <h1 className='title'>ToDo</h1>
       <TodoForm createTodo={createTodo} />
       <Row>

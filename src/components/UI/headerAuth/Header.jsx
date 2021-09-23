@@ -1,8 +1,8 @@
 import { Button, Input, Modal } from 'antd';
-import React, { useContext, useState } from 'react';
-import { login, registration } from '../../../http/userAPI';
+import React, { useState } from 'react';
+import { login, registration, logout as callLogout } from '../../../http/userAPI';
 
-const Header = () => {
+const Header = ({ setIsAuth, isAuth }) => {
   const [loginModal, setLoginModal] = useState(false);
   const [registrationModal, setRegistrationModal] = useState(false);
   const [email, setEmail] = useState();
@@ -10,32 +10,48 @@ const Header = () => {
 
   const registr = async () => {
     let data;
-    data = await registration(email, password);
+    data = await registration(email, password, setIsAuth);
   };
 
   const loginUser = async () => {
     let user;
-    user = await login(email, password);
-    console.log(user);
+    user = await login(email, password, setIsAuth);
+  };
+
+  const logout =  () => {
+    callLogout(setIsAuth);
   };
 
   return (
     <header style={{ display: 'flex', justifyContent: 'flex-end' }}>
-      <Button type='ghost' onClick={() => setLoginModal(true)}>
-        Sign In
-      </Button>
-      <Button
-        onClick={() => setRegistrationModal(true)}
-        type='primary'
-        style={{ marginLeft: 10, fontWeight: 'bold' }}
-      >
-        Sign Up
-      </Button>
+      {isAuth ? (
+        <Button
+          onClick={logout}
+          type='primary'
+          style={{ marginLeft: 10, fontWeight: 'bold' }}
+        >
+          LOGOUT
+        </Button>
+      ) : (
+        <>
+          <Button type='ghost' onClick={() => setLoginModal(true)}>
+            Sign In
+          </Button>
+          <Button
+            onClick={() => setRegistrationModal(true)}
+            type='primary'
+            style={{ marginLeft: 10, fontWeight: 'bold' }}
+          >
+            Sign Up
+          </Button>
+        </>
+      )}
+
       <Modal
         title='Sign In'
         centered
         visible={loginModal}
-        onOk={() => setLoginModal(false), () => loginUser()}
+        onOk={(() => loginUser())}
         onCancel={() => setLoginModal(false)}
       >
         <form>
@@ -66,6 +82,7 @@ const Header = () => {
         visible={registrationModal}
         onOk={(() => setRegistrationModal(false), () => registr())}
         onCancel={() => setRegistrationModal(false)}
+
       >
         <p style={{ textAlign: 'center', fontSize: 18 }}>Welcome!</p>
         <form>
