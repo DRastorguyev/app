@@ -12,14 +12,20 @@ const Header = ({ setIsAuth, isAuth }) => {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
 
+  const closeModal = () => {
+    setIsAuth(true);
+    setLoginModal(false);
+    setRegistrationModal(false);
+  };
+
   const registr = async () => {
     let data;
-    data = await registration(email, password, setIsAuth);
+    data = await registration(email, password, closeModal);
   };
 
   const loginUser = async () => {
     let user;
-    user = await login(email, password, setIsAuth);
+    user = await login(email, password, closeModal);
   };
 
   const logout = () => {
@@ -55,7 +61,7 @@ const Header = ({ setIsAuth, isAuth }) => {
         title='Sign In'
         centered
         visible={loginModal}
-        onOk={() => loginUser()}
+        onOk={loginUser}
         onCancel={() => setLoginModal(false)}
       >
         <form>
@@ -84,7 +90,7 @@ const Header = ({ setIsAuth, isAuth }) => {
         title='Sign Up'
         centered
         visible={registrationModal}
-        onOk={(() => setRegistrationModal(false), () => registr())}
+        onOk={registr}
         onCancel={() => setRegistrationModal(false)}
       >
         <p style={{ textAlign: 'center', fontSize: 18 }}>Welcome!</p>
