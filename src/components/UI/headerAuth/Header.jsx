@@ -1,6 +1,10 @@
-import { Button, Input, Modal } from 'antd';
+import { Button, Input, Modal, message } from 'antd';
 import React, { useState } from 'react';
-import { login, registration, logout as callLogout } from '../../../http/userAPI';
+import {
+  login,
+  registration,
+  logout as callLogout,
+} from '../../../http/userAPI';
 
 const Header = ({ setIsAuth, isAuth }) => {
   const [loginModal, setLoginModal] = useState(false);
@@ -18,7 +22,7 @@ const Header = ({ setIsAuth, isAuth }) => {
     user = await login(email, password, setIsAuth);
   };
 
-  const logout =  () => {
+  const logout = () => {
     callLogout(setIsAuth);
   };
 
@@ -51,7 +55,7 @@ const Header = ({ setIsAuth, isAuth }) => {
         title='Sign In'
         centered
         visible={loginModal}
-        onOk={(() => loginUser())}
+        onOk={() => loginUser()}
         onCancel={() => setLoginModal(false)}
       >
         <form>
@@ -82,7 +86,6 @@ const Header = ({ setIsAuth, isAuth }) => {
         visible={registrationModal}
         onOk={(() => setRegistrationModal(false), () => registr())}
         onCancel={() => setRegistrationModal(false)}
-
       >
         <p style={{ textAlign: 'center', fontSize: 18 }}>Welcome!</p>
         <form>

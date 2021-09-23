@@ -9,13 +9,12 @@ import { $authHost } from './http/index';
 
 function App() {
   const [todos, setTodos] = useState([]);
-
+  const [isAuth, setIsAuth] = useState(false);
+  const [page, setPage] = useState(1);
   const [filter, setFilter] = useState({
     sortDirection: 'asc',
     filterType: 'all',
   });
-
-  const [isAuth, setIsAuth] = useState(false);
 
   const fetchTodos = async () => {
     try {
@@ -27,8 +26,6 @@ function App() {
       const responce = await $authHost.get('/todos', {
         params,
       });
-
-      console.log(responce.data);
       setTodos(responce.data);
     } catch (error) {
       setTodos([]);
@@ -42,15 +39,8 @@ function App() {
         done: false,
       });
     } catch (error) {
-      if (error.message === 'Request failed with status code 422') {
-        message.error(
-          'Validation error: Message must be at least 2 characters long name in body'
-        );
-      } else {
-        message.error('Task with the same name exists');
-      }
+      message.error('You need to sign in');
     }
-
     fetchTodos();
   };
 
@@ -60,7 +50,6 @@ function App() {
   };
 
   const patchTodo = async (id, editDate) => {
-    console.log(editDate);
     await $authHost.patch(`/todos/${id}`, editDate);
     fetchTodos();
   };
@@ -70,10 +59,8 @@ function App() {
   }, [filter, isAuth]);
 
   useEffect(() => {
-    setIsAuth(!!localStorage.getItem('token'))
-  })
-
-  const [page, setPage] = useState(1);
+    setIsAuth(!!localStorage.getItem('token'));
+  }, []);
 
   return (
     <div className='App'>
