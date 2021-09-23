@@ -2,7 +2,7 @@
   "name": "app",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://drastorguyev.github.io",
+  "homepage": "https://drastorguyev.github.io/toDo-frontend/",
   "dependencies": {
     "@ant-design/colors": "^6.0.0",
     "@ant-design/icons": "^4.6.4",
