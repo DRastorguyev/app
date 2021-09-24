@@ -2,15 +2,18 @@ import React, { useState } from 'react';
 import { Button, Input } from 'antd';
 import { registration, logout as callLogout } from '../../../http/userAPI';
 import cl from './AuthPageStyleSheets.module.css';
+import { Redirect } from 'react-router-dom';
 
-export default function RegistrationPage({ setIsAuth }) {
+export default function RegistrationPage({ isAuth, setIsAuth }) {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
 
-  const registr = async () => {
-    let data;
-    data = await registration(email, password, setIsAuth);
+  const registr = () => {
+    registration(email, password, setIsAuth);
   };
+
+	if(isAuth) return (<Redirect to='/' />)
+
   return (
     <div className={cl.login_form}>
       <p className={cl.title}>Create account</p>
