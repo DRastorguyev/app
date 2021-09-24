@@ -1,123 +1,49 @@
-import { Button, Input, Modal, message } from 'antd';
+import { Button } from 'antd';
 import React, { useState } from 'react';
-import {
-  login,
-  registration,
-  logout as callLogout,
-} from '../../../http/userAPI';
+import { Link } from 'react-router-dom';
+import { logout } from '../../../http/userAPI';
 
-const Header = ({ setIsAuth, isAuth }) => {
-  const [loginModal, setLoginModal] = useState(false);
-  const [registrationModal, setRegistrationModal] = useState(false);
-  const [email, setEmail] = useState();
-  const [password, setPassword] = useState();
+export default function Header({ isAuth, setIsAuth }) {
 
-  const closeModal = () => {
-    setIsAuth(true);
-    setLoginModal(false);
-    setRegistrationModal(false);
-  };
-
-  const registr = async () => {
-    let data;
-    data = await registration(email, password, closeModal);
-  };
-
-  const loginUser = async () => {
-    let user;
-    user = await login(email, password, closeModal);
-  };
-
-  const logout = () => {
-    callLogout(setIsAuth);
-  };
+  const logoutUser = () => {
+    logout(setIsAuth)
+  }
 
   return (
-    <header style={{ display: 'flex', justifyContent: 'flex-end' }}>
-      {isAuth ? (
-        <Button
-          onClick={logout}
-          type='primary'
-          style={{ marginLeft: 10, fontWeight: 'bold' }}
-        >
-          LOGOUT
-        </Button>
-      ) : (
-        <>
-          <Button type='ghost' onClick={() => setLoginModal(true)}>
-            Sign In
-          </Button>
-          <Button
-            onClick={() => setRegistrationModal(true)}
-            type='primary'
-            style={{ marginLeft: 10, fontWeight: 'bold' }}
-          >
-            Sign Up
-          </Button>
-        </>
-      )}
-
-      <Modal
-        title='Sign In'
-        centered
-        visible={loginModal}
-        onOk={loginUser}
-        onCancel={() => setLoginModal(false)}
-      >
-        <form>
-          <section style={{ display: 'flex' }}>
-            <p style={{ marginRight: 57 }}>Mail:</p>
-            <Input
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              style={{ height: 27 }}
-              placeholder='yourmail@gmail.com...'
-            ></Input>
-          </section>
-          <section style={{ display: 'flex' }}>
-            <p style={{ marginRight: 25 }}>Password:</p>
-            <Input
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              style={{ height: 27 }}
-              placeholder='steveJobs123...'
-              type='password'
-            ></Input>
-          </section>
-        </form>
-      </Modal>
-      <Modal
-        title='Sign Up'
-        centered
-        visible={registrationModal}
-        onOk={registr}
-        onCancel={() => setRegistrationModal(false)}
-      >
-        <p style={{ textAlign: 'center', fontSize: 18 }}>Welcome!</p>
-        <form>
-          <section style={{ display: 'flex' }}>
-            <p style={{ marginRight: 57 }}>Mail:</p>
-            <Input
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              style={{ height: 27 }}
-              placeholder='yourmail@gmail.com...'
-            ></Input>
-          </section>
-          <section style={{ display: 'flex' }}>
-            <p style={{ marginRight: 25 }}>Password:</p>
-            <Input
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              style={{ height: 27 }}
-              placeholder='steveJobs123...'
-              type='password'
-            ></Input>
-          </section>
-        </form>
-      </Modal>
-    </header>
+    <div
+      style={{
+        display: 'flex',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+      }}
+    >
+      <div>
+        <Link style={{ fontSize: 60, fontWeight: 100, color: 'white' }} to='/'>
+          Todo
+        </Link>
+      </div>
+      <div>
+        {!isAuth ? (
+          <>
+            <Link to='/login'>
+              <Button style={{ marginRight: 10 }} value='small' type='ghost'>
+                Sign In
+              </Button>
+            </Link>
+            <Link to='/registration'>
+              <Button value='small' type='primary'>
+                Sign Up
+              </Button>
+            </Link>
+          </>
+        ) : (
+          <Link to='/'>
+            <Button onClick={logoutUser} value='small' type='primary'>
+              Logout
+            </Button>
+          </Link>
+        )}
+      </div>
+    </div>
   );
-};
-
-export default Header;
+}

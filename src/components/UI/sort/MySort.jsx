@@ -38,7 +38,7 @@ const MySort = ({ setFilter }) => {
         </Button>
         <Button
           size='small'
-          style={{ marginRight: 10, color: '#fff'}}
+          style={{ color: '#fff'}}
           type='ghost'
           shape='round'
           onClick={filterButtonHandler('undone')}
@@ -59,7 +59,7 @@ const MySort = ({ setFilter }) => {
         </Button>
         <Button
           size='small'
-          style={{ marginRight: 10, color: '#fff'}}
+          style={{ color: '#fff'}}
           type='ghost'
           shape='round'
           onClick={sortButtonHandler('desc')}

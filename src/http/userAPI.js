@@ -1,7 +1,7 @@
 import { $host } from './index';
 import { message } from 'antd';
 
-export const registration = async (email, password, callback = false) => {
+export const registration = async (email, password, setIsAuth = false) => {
   try {
     const { data } = await $host.post('/user/registration', {
       email,
@@ -9,13 +9,13 @@ export const registration = async (email, password, callback = false) => {
     });
     if (!data.token) return;
     localStorage.setItem('token', data.token);
-    if (callback) callback()
+    if (setIsAuth) setIsAuth(true)
   } catch (error) {
     if(email) message.error('Email already exists')
   }
 };
 
-export const login = async (email, password, callback = false) => {
+export const login = async (email, password, setIsAuth = false) => {
   try {
     const { data } = await $host.post('/user/login', {
       email,
@@ -23,7 +23,7 @@ export const login = async (email, password, callback = false) => {
     });
     if (!data.token) return;
     localStorage.setItem('token', data.token);
-    if (callback) callback()
+    if (setIsAuth) setIsAuth(true)
   } catch (error) {
     message.error('Incorrect login or password');
   }
