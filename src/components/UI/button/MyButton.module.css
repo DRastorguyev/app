@@ -1,0 +1,28 @@
+.myBtn {
+  padding: 5px 12px;
+  color: #945297;
+  font-size: 14px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  border-radius: 7px;
+  font-weight: 100;
+
+  transition: all ease .3s;
+
+  margin: 0 3px;
+
+  box-shadow: 2px 1px 3px rgba(97, 88, 97, 0.315);  
+}
+
+.myBtn:hover {
+  background-color: rgba(163, 160, 160, 0.575);
+  color: #000;
+  box-shadow: 1px 2px 4px rgba(87, 81, 77, 0.212);
+}
+
+.activePaginateButton {
+  color: #444;
+  background: rgba(68, 64, 64, 0.295);
+  box-shadow: none;
+}

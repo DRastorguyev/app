@@ -1,0 +1,39 @@
+* {
+  margin: 0;
+  padding: 0;
+
+  box-sizing: border-box;
+
+  font-family: 'Lato', sans-serif;
+
+  font-weight: 600;
+}
+
+.App {
+  padding: 50px 120px 120px 120px;
+  width: 100%;
+
+}
+
+body {
+  background: url('https://images.pexels.com/photos/1287145/pexels-photo-1287145.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260') no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  backdrop-filter: blur(25px) contrast(60%);
+}
+
+
+#root {
+  display: flex;
+  justify-content: center;
+}
+
+
+.title {
+  text-align: center;
+  font-size: 55px;
+  font-weight: 300;
+  margin-bottom: 35px;
+}
