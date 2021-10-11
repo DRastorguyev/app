@@ -14,10 +14,6 @@ export default function Todos({ isAuth }) {
     filterType: 'all',
   });
 
-  const visibleTodos = todos.slice((page - 1) * 5, page * 5);
-  if (!visibleTodos.length)
-    setPage((pageState) => (pageState === 1 ? pageState : pageState - 1));
-
   const fetchTodos = async () => {
     try {
       const params = { order: filter.sortDirection };
@@ -74,6 +70,7 @@ export default function Todos({ isAuth }) {
             setPage(newPage);
           },
           total: todos.length,
+          hideOnSinglePage: true
         }}
       >
         <Col xs={24} md={{ span: 24, offset: 0 }}>
@@ -82,7 +79,7 @@ export default function Todos({ isAuth }) {
             setPage={setPage}
             patchTodo={patchTodo}
             removeTodo={removeTodo}
-            todos={visibleTodos}
+            todos={todos.slice((page - 1) * 5, page * 5)}
           />
         </Col>
       </List>

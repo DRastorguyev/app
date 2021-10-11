@@ -3,6 +3,9 @@ import React from 'react';
 import RowBox from './RowBox';
 
 const TodoList = ({ todos, removeTodo, selectToDo, patchTodo, setPage }) => {
+  if (!todos.length)
+    setPage((pageState) => (pageState === 1 ? pageState : pageState - 1));
+
   return (
     <List
       style={{ marginTop: 35 }}

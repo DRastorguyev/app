@@ -4,7 +4,6 @@ import { Redirect } from 'react-router-dom';
 import { login as loginApi } from '../../../http/userAPI';
 import cl from './AuthPageStyleSheets.module.css';
 
-
 export default function LoginPage({ setIsAuth, isAuth }) {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
@@ -19,7 +18,7 @@ export default function LoginPage({ setIsAuth, isAuth }) {
     <div className={cl.login_form}>
       <p className={cl.title}>Welcome back!</p>
       <div className={cl.main_form}>
-        <div>
+        <form>
           <div className={cl.form}>
             <p className={cl.form_title__email}>email:</p>
             <Input
@@ -39,7 +38,7 @@ export default function LoginPage({ setIsAuth, isAuth }) {
               placeholder='ex: steveJobs123'
             ></Input>
           </div>
-        </div>
+        </form>
         <Button onClick={login} className={cl.login_btn} type='ghost'>
           Login!
         </Button>
