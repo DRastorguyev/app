@@ -68,7 +68,7 @@ export default function RegistrationPage({ isAuth, setIsAuth }) {
     };
   };
 
-  const email = useInput("", { isEmpty: true, minLength: 4, isEmail: true });
+  const email = useInput("", { isEmpty: true, isEmail: true });
   const password = useInput("", { isEmpty: true, minLength: 6 });
 
   const registr = () => {
@@ -77,37 +77,77 @@ export default function RegistrationPage({ isAuth, setIsAuth }) {
 
   if (isAuth) return <Redirect to="/" />;
 
+  let div;
+  if (email.isDirty && email.isEmpty) {
+    div = (
+      <div
+        style={{
+          position: "absolute",
+          marginLeft: "19rem",
+          color: "#9d2323cd",
+          fontWeight: 400,
+          fontSize: 16,
+        }}
+      >
+        Required field
+      </div>
+    );
+  } else if (email.isDirty && email.emailError) {
+    div = (
+      <div
+        style={{
+          position: "absolute",
+          marginLeft: "19rem",
+          color: "#9d2323cd",
+          fontWeight: 400,
+          fontSize: 16,
+        }}
+      >
+        Invalid Email
+      </div>
+    );
+  }
+
   return (
     <div className={cl.login_form}>
       <p className={cl.title}>Create account</p>
       <div className={cl.main_form}>
+        {div}
+
         <form>
           <div className={cl.form}>
             <p className={cl.form_title__email}>email:</p>
-            {email.isDirty && email.isEmpty && (
-              <div style={{ color: "red" }}>Поле не может быть пустым</div>
-            )}
-            {email.isDirty && email.minLengthError && (
-              <div style={{ color: "red" }}>Больше</div>
-            )}
-            {email.isDirty && email.emailError && (
-              <div style={{ color: "red" }}>Неправильно введён меил</div>
-            )}
             <Input
               onChange={(e) => email.onChange(e)}
               onBlur={(e) => email.onBlur(e)}
               value={email.value}
-              style={{ marginBottom: 15, marginLeft: 32 }}
+              style={{
+                marginBottom: 15,
+                marginTop: 20,
+                marginLeft: 32,
+                position: "relative",
+              }}
               type="email"
               name="email"
               placeholder="ex: index@mail.com"
             ></Input>
           </div>
+          {password.isDirty && password.minLengthError && (
+            <div
+              style={{
+                position: "absolute",
+                margin: "-10px 0 0 16rem",
+                color: "#9d2323cd",
+                fontWeight: 400,
+                fontSize: 16,
+              }}
+            >
+              Password must be at least 6 characters
+            </div>
+          )}
           <div className={cl.form}>
             <p className={cl.form_title__password}>password:</p>
-            {password.isDirty && password.minLengthError && (
-              <div style={{ color: "red" }}>пароль слишком короткий</div>
-            )}
+
             <Input
               onChange={(e) => password.onChange(e)}
               onBlur={(e) => password.onBlur(e)}
