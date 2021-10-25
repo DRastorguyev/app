@@ -4,7 +4,7 @@ import Checkbox from 'antd/lib/checkbox/Checkbox';
 import { DeleteOutlined } from '@ant-design/icons';
 import { List } from 'antd';
 
-const RowBox = ({ todo, removeTodo, patchTodo }) => {
+const RowBox = ({ todo, removeTodo, patchTodo, dragAndDrop }) => {
   const [showInput, setShowInput] = useState(false);
   const [clicked, setClicked] = useState(true);
 
@@ -17,8 +17,18 @@ const RowBox = ({ todo, removeTodo, patchTodo }) => {
   return (
     <List.Item style={{ borderBottom: '1px solid #f0f0f042' }}>
       <Row
-        justify='space-between'
-        style={{ width: '100%', alignItems: 'center', color: '#fff' }}
+        draggable
+        onDragOver={dragAndDrop.dragOverHandler}
+        onDragLeave={dragAndDrop.dragLeaveHandler}
+        onDragStart={dragAndDrop.dragStartHandler}
+        onDrop={dragAndDrop.dropHandler}
+        justify="space-between"
+        style={{
+          width: '100%',
+          alignItems: 'center',
+          color: '#fff',
+          cursor: 'grab',
+        }}
       >
         <Col style={{ cursor: 'pointer' }}>
           <Row
@@ -26,7 +36,7 @@ const RowBox = ({ todo, removeTodo, patchTodo }) => {
               e.stopPropagation();
               setShowInput(true);
             }}
-            align='middle'
+            align="middle"
           >
             <Checkbox
               checked={todo.done ? true : false}
@@ -40,7 +50,7 @@ const RowBox = ({ todo, removeTodo, patchTodo }) => {
               {showInput ? (
                 <Input
                   style={{ width: '50vh' }}
-                  size='small'
+                  size="small"
                   autoFocus
                   onBlur={() => setShowInput(false)}
                   onKeyDown={editTodo}
@@ -54,7 +64,7 @@ const RowBox = ({ todo, removeTodo, patchTodo }) => {
         </Col>
         <Col>
           {todo.createdAt.slice(11, 19)}
-          <Tooltip placement='right' title='Delete'>
+          <Tooltip placement="right" title="Delete">
             <Button
               disabled={!clicked}
               onClick={(e) => {
@@ -63,8 +73,8 @@ const RowBox = ({ todo, removeTodo, patchTodo }) => {
                 removeTodo(todo.id);
               }}
               style={{ marginLeft: 65, marginRight: 18 }}
-              shape='circle'
-              size='small'
+              shape="circle"
+              size="small"
               icon={<DeleteOutlined />}
             />
           </Tooltip>

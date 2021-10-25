@@ -29,6 +29,7 @@ export default function RegistrationPage({ isAuth, setIsAuth }) {
               ? setEmailError(false)
               : setEmailError(true);
             break;
+          default: // empty default
         }
       }
     }, [value]);

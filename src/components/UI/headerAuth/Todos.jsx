@@ -70,12 +70,13 @@ export default function Todos({ isAuth }) {
             setPage(newPage);
           },
           total: todos.length,
-          hideOnSinglePage: true
+          hideOnSinglePage: true,
         }}
       >
         <Col xs={24} md={{ span: 24, offset: 0 }}>
           <MySort fetchTodos={fetchTodos} setFilter={setFilter} />
           <TodoList
+            setTodos={setTodos}
             setPage={setPage}
             patchTodo={patchTodo}
             removeTodo={removeTodo}
