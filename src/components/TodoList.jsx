@@ -18,7 +18,7 @@ function TodoList({
   const dragAndDrop = (todo) => ({
     dragOverHandler: (e) => {
       e.preventDefault();
-      e.target.style.background = 'lightgrey';
+      e.currentTarget.style.background = 'lightgrey';
     },
 
     dragLeaveHandler: (e) => {
@@ -31,7 +31,7 @@ function TodoList({
 
     dropHandler: (e) => {
       e.preventDefault();
-      e.target.style.background = 'inherit';
+      e.currentTarget.style.background = 'inherit';
 
       const selectedTodoId = currentTodo.id;
       const targetTodoId = todo.id;
