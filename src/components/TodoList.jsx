@@ -36,9 +36,6 @@ function TodoList({
       const selectedTodoId = currentTodo.id;
       const targetTodoId = todo.id;
 
-      console.log('seletedTodoId', selectedTodoId);
-      console.log('targetTodoId', targetTodoId);
-
       if (targetTodoId === selectedTodoId) return;
 
       patchTodo(currentTodo.id, {
