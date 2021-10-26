@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react";
-import { Button, Input } from "antd";
-import { registration } from "../../../http/userAPI";
-import cl from "./AuthPageStyleSheets.module.css";
-import { Redirect } from "react-router-dom";
+import React, { useEffect, useState } from 'react';
+import { Button, Input } from 'antd';
+import { registration } from '../../../http/userAPI';
+import cl from './AuthPageStyleSheets.module.css';
+import { Redirect } from 'react-router-dom';
 
 export default function RegistrationPage({ isAuth, setIsAuth }) {
   const useValidation = (value, validations) => {
@@ -14,15 +14,15 @@ export default function RegistrationPage({ isAuth, setIsAuth }) {
     useEffect(() => {
       for (const validation in validations) {
         switch (validation) {
-          case "minLength":
+          case 'minLength':
             value.length < validations[validation]
               ? setMinLengthError(true)
               : setMinLengthError(false);
             break;
-          case "isEmpty":
+          case 'isEmpty':
             value ? setEmpty(false) : setEmpty(true);
             break;
-          case "isEmail":
+          case 'isEmail':
             const re =
               /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
             re.test(String(value).toLowerCase())
@@ -32,7 +32,7 @@ export default function RegistrationPage({ isAuth, setIsAuth }) {
           default: // empty default
         }
       }
-    }, [value]);
+    }, [validations, value]);
 
     useEffect(() => {
       if (isEmpty || minLengthError || emailError) {
@@ -69,8 +69,8 @@ export default function RegistrationPage({ isAuth, setIsAuth }) {
     };
   };
 
-  const email = useInput("", { isEmpty: true, isEmail: true });
-  const password = useInput("", { isEmpty: true, minLength: 6 });
+  const email = useInput('', { isEmpty: true, isEmail: true });
+  const password = useInput('', { isEmpty: true, minLength: 6 });
 
   const registr = () => {
     registration(email.value, password.value, setIsAuth);
@@ -83,9 +83,9 @@ export default function RegistrationPage({ isAuth, setIsAuth }) {
     div = (
       <div
         style={{
-          position: "absolute",
-          marginLeft: "19rem",
-          color: "#9d2323cd",
+          position: 'absolute',
+          marginLeft: '19rem',
+          color: '#9d2323cd',
           fontWeight: 400,
           fontSize: 16,
         }}
@@ -97,9 +97,9 @@ export default function RegistrationPage({ isAuth, setIsAuth }) {
     div = (
       <div
         style={{
-          position: "absolute",
-          marginLeft: "19rem",
-          color: "#9d2323cd",
+          position: 'absolute',
+          marginLeft: '19rem',
+          color: '#9d2323cd',
           fontWeight: 400,
           fontSize: 16,
         }}
@@ -114,7 +114,6 @@ export default function RegistrationPage({ isAuth, setIsAuth }) {
       <p className={cl.title}>Create account</p>
       <div className={cl.main_form}>
         {div}
-
         <form>
           <div className={cl.form}>
             <p className={cl.form_title__email}>email:</p>
@@ -126,7 +125,7 @@ export default function RegistrationPage({ isAuth, setIsAuth }) {
                 marginBottom: 15,
                 marginTop: 20,
                 marginLeft: 32,
-                position: "relative",
+                position: 'relative',
               }}
               type="email"
               name="email"
@@ -136,9 +135,9 @@ export default function RegistrationPage({ isAuth, setIsAuth }) {
           {password.isDirty && password.minLengthError && (
             <div
               style={{
-                position: "absolute",
-                margin: "-10px 0 0 16rem",
-                color: "#9d2323cd",
+                position: 'absolute',
+                margin: '-10px 0 0 16rem',
+                color: '#9d2323cd',
                 fontWeight: 400,
                 fontSize: 16,
               }}

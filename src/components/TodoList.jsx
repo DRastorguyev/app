@@ -2,15 +2,14 @@ import { List } from 'antd';
 import React, { useState } from 'react';
 import RowBox from './RowBox';
 
-const TodoList = ({
+function TodoList({
   todos,
   setTodos,
   removeTodo,
   selectToDo,
   patchTodo,
   setPage,
-}) => {
-  
+}) {
   if (!todos.length)
     setPage((pageState) => (pageState === 1 ? pageState : pageState - 1));
 
@@ -27,7 +26,6 @@ const TodoList = ({
     },
 
     dragStartHandler: (e) => {
-      console.log(e);
       setCurrentTodo(todo);
     },
 
@@ -38,7 +36,15 @@ const TodoList = ({
       const selectedTodoId = currentTodo.id;
       const targetTodoId = todo.id;
 
+      console.log('seletedTodoId', selectedTodoId);
+      console.log('targetTodoId', targetTodoId);
+
       if (targetTodoId === selectedTodoId) return;
+
+      patchTodo(currentTodo.id, {
+        selectedTodoId,
+        targetTodoId,
+      });
     },
   });
 
@@ -61,6 +67,6 @@ const TodoList = ({
       )}
     />
   );
-};
+}
 
 export default TodoList;
