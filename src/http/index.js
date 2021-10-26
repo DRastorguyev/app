@@ -1,13 +1,11 @@
 import axios from 'axios';
 
 const $host = axios.create({
-  // baseURL: 'https://todo-rastorguev.herokuapp.com',
-  baseURL: 'http://localhost:5000'
+  baseURL: 'https://todo-rastorguev.herokuapp.com',
 });
 
 const $authHost = axios.create({
-  // baseURL: 'https://todo-rastorguev.herokuapp.com',
-  baseURL: 'http://localhost:5000'
+  baseURL: 'https://todo-rastorguev.herokuapp.com',
 });
 
 const authInterceptor = (config) => {
