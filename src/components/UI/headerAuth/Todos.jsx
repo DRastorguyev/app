@@ -56,7 +56,7 @@ export default function Todos({ isAuth }) {
     fetchTodos();
     if (page >= 2) setPage(1);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [filter, isAuth]);
+  }, [filter, isAuth, patchTodo]);
 
   return (
     <div>
