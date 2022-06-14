@@ -12,11 +12,11 @@
 .App {
   padding: 50px 120px 120px 120px;
   width: 100%;
-
 }
 
 body {
-  background: url('https://images.pexels.com/photos/1287145/pexels-photo-1287145.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260') no-repeat center center fixed;
+  background: url('https://rare-gallery.com/thumbs/126394-annapurna-massif-himalayas-nepal-mountains-sunrise-minimal-4k.jpg')
+    no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -24,12 +24,10 @@ body {
   backdrop-filter: blur(25px) contrast(60%);
 }
 
-
 #root {
   display: flex;
   justify-content: center;
 }
-
 
 .title {
   text-align: center;
